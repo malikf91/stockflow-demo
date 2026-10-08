@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StockFlow – Interactive Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#1b2333;--mut:#6b7280;--line:#e4e7ec;--pri:#0f766e;--pri2:#0d5f59;--soft:#d9f3ef;--warn:#b45309;--warnbg:#fef3c7;--bad:#b91c1c;--badbg:#fee2e2;--ok:#15803d;--okbg:#dcfce7;--info:#1d4ed8;--infobg:#dbeafe;--side:#12202b}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+body.ur{font-family:'Noto Nastaliq Urdu',Inter,sans-serif;line-height:1.9}
+button,input,select{font:inherit;color:inherit}
+.app{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
+.side{background:var(--side);color:#cbd5df;padding:14px 10px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:9px;align-items:center;color:#fff;font-weight:700;font-size:16px;padding:4px 8px 14px}
+.logo{width:30px;height:30px;border-radius:8px;background:var(--pri);display:grid;place-items:center;font-weight:700}
+.tn{background:#1c2f3d;border-radius:10px;padding:9px 10px;margin:0 0 12px;font-size:12px}
+.tn b{display:block;color:#fff;font-size:13px}
+.nav a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;color:#cbd5df;text-decoration:none;cursor:pointer;margin-bottom:1px}
+.nav a:hover{background:#1c2f3d}.nav a.on{background:var(--pri);color:#fff}
+.nav svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.nav h6{margin:14px 10px 4px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#6f8394}
+.main{min-width:0}
+.top{display:flex;gap:10px;align-items:center;padding:10px 22px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+.top .sp{flex:1}
+.demo{background:var(--warnbg);color:var(--warn);font-size:11.5px;padding:3px 9px;border-radius:99px;font-weight:600}
+.sel{border:1px solid var(--line);border-radius:8px;padding:6px 9px;background:#fff}
+.page{padding:20px 22px 60px;max-width:1280px}
+h1{font-size:20px;margin:0 0 3px}.sub{color:var(--mut);margin:0 0 16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card h3{margin:0 0 10px;font-size:14px}
+.kpi small{color:var(--mut);display:block}.kpi b{font-size:22px;display:block;margin-top:2px}.kpi i{font-style:normal;font-size:12px}
+.up{color:var(--ok)}.dn{color:var(--bad)}
+.btn{background:var(--pri);color:#fff;border:0;border-radius:8px;padding:7px 13px;cursor:pointer;font-weight:600}
+.btn:hover{background:var(--pri2)}.btn.g{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.g:hover{background:#f3f4f6}
+.btn.s{padding:4px 9px;font-size:12px}.btn.r{background:var(--bad)}
+table{width:100%;border-collapse:collapse}
+th{text-align:start;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--mut);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid #f0f1f4;vertical-align:middle}
+tr.cl{cursor:pointer}tr.cl:hover td{background:#f8fafb}
+.num{text-align:end;font-variant-numeric:tabular-nums}
+.tw{overflow:auto}
+.chip{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11.5px;font-weight:600;background:#eef0f3;color:#475467}
+.chip.ok{background:var(--okbg);color:var(--ok)}.chip.warn{background:var(--warnbg);color:var(--warn)}.chip.bad{background:var(--badbg);color:var(--bad)}.chip.info{background:var(--infobg);color:var(--info)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;flex-wrap:wrap}
+.tabs a{padding:8px 13px;cursor:pointer;color:var(--mut);border-bottom:2px solid transparent;font-weight:600}
+.tabs a.on{color:var(--pri);border-color:var(--pri)}
+input[type=text],input[type=number],input[type=date],select.f,textarea{border:1px solid var(--line);border-radius:8px;padding:7px 9px;width:100%;background:#fff}
+label.l{display:block;font-size:12px;color:var(--mut);margin:0 0 3px;font-weight:600}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.bar{height:7px;background:#eceff2;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pri)}.bar i.w{background:#d97706}.bar i.b{background:var(--bad)}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(560px,100%);background:#fff;box-shadow:-8px 0 30px #0003;z-index:20;padding:20px;overflow:auto;transform:translateX(105%);transition:.25s}
+body.ur .drawer{inset:0 auto 0 0;transform:translateX(-105%)}
+.drawer.open{transform:none}
+.veil{position:fixed;inset:0;background:#0006;z-index:19;display:none}.veil.open{display:block}
+.modal{position:fixed;inset:0;display:none;place-items:center;z-index:30;background:#0007;padding:16px}.modal.open{display:grid}
+.modal>div{background:#fff;border-radius:14px;padding:20px;max-width:640px;width:100%;max-height:92vh;overflow:auto}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#12202b;color:#fff;padding:10px 16px;border-radius:10px;z-index:40;display:none}
+.tog{position:relative;width:40px;height:22px;background:#cfd5dc;border-radius:99px;cursor:pointer;flex:none;transition:.2s}
+.tog:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:.2s}
+.tog.on{background:var(--pri)}.tog.on:after{left:21px}
+.mod{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #f0f1f4}.mod>div:first-child{flex:1}.mod .tog{flex:none}.mod b{display:block}.mod small{color:var(--mut)}
+.note{background:#ecfeff;border:1px solid #a5f3fc;border-radius:10px;padding:11px 13px;color:#155e75}
+.pre{border:2px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:#fff}.pre.on{border-color:var(--pri);background:#f0fdfa}
+.pre b{display:block}.pre small{color:var(--mut)}
+.kan{display:grid;grid-template-columns:repeat(4,minmax(200px,1fr));gap:12px;overflow:auto}
+.kan>div{background:#eef0f3;border-radius:12px;padding:10px;min-height:200px}.kan h4{margin:0 0 8px;font-size:12.5px;display:flex;justify-content:space-between}
+.oc{background:#fff;border-radius:9px;padding:9px 10px;margin-bottom:8px;border:1px solid var(--line);font-size:13px}
+.phones{display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start}
+.phone{width:330px;height:660px;border-radius:38px;background:#111;padding:11px;box-shadow:0 14px 40px #0003;flex:none}
+.scr{background:#f4f5f7;border-radius:28px;height:100%;overflow:hidden;display:flex;flex-direction:column;position:relative;font-size:13px}
+.ps{display:flex;justify-content:space-between;padding:8px 18px 2px;font-size:11px;font-weight:600}
+.ph{background:var(--pri);color:#fff;padding:10px 14px 14px}.ph b{font-size:16px;display:block}
+.pb{flex:1;overflow:auto;padding:12px}
+.pn{display:flex;border-top:1px solid var(--line);background:#fff}.pn a{flex:1;text-align:center;padding:9px 0;font-size:11px;color:var(--mut);cursor:pointer}.pn a.on{color:var(--pri);font-weight:700}
+.pc{background:#fff;border-radius:11px;padding:10px 11px;margin-bottom:9px;border:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:8px}.qty button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:15px;cursor:pointer}
+.inv{font-size:12.5px}.inv table td,.inv table th{padding:5px 6px}
+.hide{display:none!important}
+@media(max-width:860px){.app{grid-template-columns:1fr}.side{position:static;height:auto}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><div class="logo">S</div><span>StockFlow</span></div>
+    <div class="tn"><b id="tnName"></b><span id="tnTag"></span></div>
+    <nav class="nav" id="nav"></nav>
+  </aside>
+  <div class="main">
+    <div class="top">
+      <span class="demo">Interactive mockup · sample data</span>
+      <span class="sp"></span>
+      <label style="color:var(--mut);font-size:12px">Demo business type</label>
+      <select class="sel" id="tsel" onchange="setTenant(this.value)">
+        <option value="dist">Distribution agency</option><option value="hw">Hardware store</option><option value="el">Electric store</option>
+      </select>
+      <select class="sel" id="lsel" onchange="setLang(this.value)"><option value="en">English</option><option value="ur">اردو</option></select>
+    </div>
+    <div class="page" id="page"></div>
+  </div>
+</div>
+<div class="veil" id="veil" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer"></div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div id="mbody"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const PRESETS={
+ dist:{name:'Al-Noor Distributors',city:'Multan',tag:'Distribution agency · Multan',
+  mods:{units:1,batch:0,schemes:0,salesman:0,delivery:1,van:0,fbr:1,cheques:0,branches:0,variants:0,serial:0,pos:1,inord:1},
+  labels:{supplier:'Principal Company',suppliers:'Principal Companies',staff:'Salesman',customer:'Shop / Customer',packTitle:'Carton'}},
+ hw:{name:'Khan Hardware & Paints',city:'Multan',tag:'Hardware store · Multan',
+  mods:{units:1,batch:0,schemes:0,salesman:0,delivery:0,van:0,fbr:1,cheques:1,branches:0,variants:1,serial:0,pos:1},
+  labels:{supplier:'Supplier',suppliers:'Suppliers',staff:'Cashier',customer:'Customer',packTitle:'Pack'}},
+ el:{name:'Bright Electric Store',city:'Multan',tag:'Electric store · Multan',
+  mods:{units:1,batch:0,schemes:0,salesman:0,delivery:1,van:0,fbr:1,cheques:0,branches:0,variants:1,serial:1,pos:1},
+  labels:{supplier:'Supplier',suppliers:'Suppliers',staff:'Cashier',customer:'Customer',packTitle:'Box'}}
+};
+const MODS=[
+ ['Core options',[
+  ['units','Multiple units of measure','Buy in cartons/boxes, sell in cartons or loose pieces with conversion.'],
+  ['batch','Batch & expiry tracking','Batch number and expiry per lot; near-expiry alerts; sell oldest-expiry first.'],
+  ['variants','Item variants','Size, colour, gauge, wattage etc. under one item.'],
+  ['serial','Serial numbers & warranty','Track serial no. and warranty for fans, appliances, tools.'],
+  ['schemes','Schemes, discounts & company claims','Company promotions, bonus goods, claim tracking.'],
+  ['cheques','Cheque management','Received/issued cheques, deposit, clear, bounce.']]],
+ ['Sales channels',[
+  ['inord','Orders received from principal company','The company\'s salesmen book orders; the office enters them here and the agency delivers.'],
+  ['pos','Counter / quick sale','Fast invoice screen for walk-in customers.'],
+  ['salesman','Field salesman app','Offline mobile app: routes, orders, collections.'],
+  ['delivery','Delivery & driver app','Loading sheets, delivery status, driver app, cash-on-delivery tracking.'],
+  ['van','Van sales','Issue stock to van, sell on the spot, end-of-day return.']]],
+ ['Compliance & scale',[
+  ['fbr','FBR sales-tax invoicing','GST, NTN/STRN, QR code, FBR reporting.'],
+  ['branches','Multiple branches / warehouses','Per-branch stock, transfers, consolidated reports.']]]
+];
+// code,name,urdu,cat,pack,conv,cost,price,stock(base),reorder(base),batch,expiry,scheme[buyPack,freeBase],bu
+const ITEMS={
+dist:[
+['TP-190','Tapal Danedar 190g','ٹپال دانے دار','Tea','Carton',48,268,285,1250,480,'T2406','2027-03-31',[5,12]],
+['SH-BM50','Shan Biryani Masala 50g','شان بریانی مصالحہ','Spices','Carton',96,78,85,310,500,'S2407','2027-01-15',[3,10]],
+['NE-MP1L','Nestlé MilkPak 1L','نیسلے ملک پیک','Dairy','Carton',12,315,330,432,240,'M2410','2026-11-20',[10,12]],
+['OL-1L',"Olper's Milk 1L",'اولپرز دودھ','Dairy','Carton',12,322,338,96,240,'O2409','2026-10-28',null],
+['LP-YL95','Lipton Yellow Label 95g','لپٹن یلو لیبل','Tea','Carton',72,138,148,2160,720,'L2408','2027-05-10',null],
+['DA-1L','Dalda Cooking Oil 1L','ڈالڈا کوکنگ آئل','Oil & Ghee','Carton',12,590,615,720,240,'D2409','2027-02-28',[5,6]],
+['NA-KT300','National Ketchup 300g','نیشنل کیچپ','Sauces','Carton',24,205,222,480,240,'N2407','2027-04-04',null],
+['KN-NDL','Knorr Noodles Chicken','نور نوڈلز','Noodles','Carton',48,62,68,1344,480,'K2410','2027-01-20',[5,12]],
+['SE-1K','Surf Excel 1kg','سرف ایکسل','Detergent','Carton',12,545,575,264,120,'S2409','2028-06-30',null]],
+hw:[
+['CM-DGK','DG Khan Cement 50kg','ڈی جی خان سیمنٹ','Building','Pallet',40,1290,1340,820,200,'','',null,'Bag'],
+['PV-1','PVC Pipe 1" (10ft) · Master','پی وی سی پائپ','Plumbing','Bundle',20,640,720,140,60,'','',null,'Pcs','Size: ½" / ¾" / 1" / 1½"'],
+['PT-WE4','Weldon Paint White 4L','ویلڈن پینٹ','Paint','Carton',4,3150,3400,48,24,'','',null,'Can','Colour: White / Ivory / Sky'],
+['GI-14','GI Wire 14G','جی آئی تار','Wire','Coil',25,310,345,300,100,'','',null,'Kg','Gauge: 12 / 14 / 16'],
+['NL-2','Nails 2 inch','کیلیں','Fasteners','Box',20,290,330,36,100,'','',null,'Kg'],
+['DR-13','Drill Bit Set 13pc','ڈرل بٹ سیٹ','Tools','Carton',6,980,1150,60,12,'','',null,'Set']],
+el:[
+['LB-12W','LED Bulb 12W Philips','ایل ای ڈی بلب','Lighting','Box',50,185,240,900,300,'','',null,'Pcs','Wattage: 7W / 9W / 12W / 18W'],
+['TL-4F','Tube Light LED 4ft','ٹیوب لائٹ','Lighting','Box',25,520,650,150,100,'','',null,'Pcs','Colour: Warm / Daylight'],
+['CB-329','Cable 3/29 PVC (Fast)','کیبل 3/29','Wire & Cable','Coil',90,95,120,1260,540,'','',null,'Mtr','Size: 1/44 / 3/29 / 7/29'],
+['SW-1W','Switch 1-way Master','سوئچ','Switches','Box',10,95,130,240,100,'','',null,'Pcs'],
+['FN-56','Ceiling Fan 56" GFC','پنکھا جی ایف سی','Fans','Carton',1,11800,13500,22,8,'','',null,'Pcs','Serial + 2-year warranty'],
+['ES-23','Energy Saver 23W','انرجی سیور','Lighting','Box',40,160,210,80,160,'','',null,'Pcs']]
+};
+const CUST={
+dist:[
+['Chaudhry General Store','Hussain Agahi','Route A – Old City',184500,300000,'Imran',46],
+['Bismillah Karyana','Chowk Kumharanwala','Route A – Old City',62000,150000,'Imran',12],
+['Madni Mart','Shah Rukn-e-Alam Colony','Route B – Colony',312000,300000,'Bilal',63],
+['Ali Super Store','Gulgasht Colony','Route B – Colony',0,250000,'Bilal',0],
+['Haji Younas Kiryana','Bosan Road','Route C – Bosan Rd',97500,200000,'Imran',28],
+['Al-Madina Mart','Nawan Shehr','Route C – Bosan Rd',241000,250000,'Bilal',52],
+['Rizwan Traders','Cantt','Route D – Cantt',18000,100000,'Imran',0],
+['Zam Zam Bakers','Vehari Road','Route D – Cantt',126000,150000,'Bilal',34]],
+hw:[
+['Rana Builders','Shujabad Road','Contractor',420000,600000,'—',58],
+['Mistri Akram','Khanewal Road','Mistri',34000,80000,'—',9],
+['Hafiz Plumbing Works','Nawan Shehr','Plumber',72500,120000,'—',21],
+['Al-Fatah Colony Project','Bosan Road','Contractor',0,500000,'—',0],
+['Walk-in customer','—','Cash',0,0,'—',0]],
+el:[
+['Ustad Bashir (Electrician)','Gulgasht','Electrician',48000,100000,'—',17],
+['Noor Electric Works','Hussain Agahi','Contractor',215000,300000,'—',44],
+['Walk-in customer','—','Cash',0,0,'—',0],
+['Sheikh Wiring Services','Cantt','Contractor',66000,150000,'—',11]]
+};
+const SUPP={dist:['Tapal Tea (Pvt) Ltd','Shan Foods','Nestlé Pakistan','Engro Foods (Olper\'s)','Unilever Pakistan','Dalda Foods'],hw:['DG Khan Cement','Master Pipes Lahore','Weldon Paints','Mughal Steel'],el:['Philips Lighting Pak','GFC Fans Gujrat','Fast Cables','Master Switchgear']};
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const SALES7={dist:[412,538,476,621,584,702,455],hw:[188,241,203,296,265,334,171],el:[96,122,141,118,164,197,88]};
+
+/* ---------------- STATE ---------------- */
+const S={tenant:'dist',lang:'en',page:'dash',mods:{},labels:{},tab:{},cheques:null,cart:null,cust:0,pay:'credit',paid:0,disc:0,claims:null,orders:null,ph:{tab:'home',offline:false,pending:2,cart:{},shop:0},cfields:null};
+const IC={
+ home:'M3 11l9-8 9 8v10H3z',box:'M21 8l-9-5-9 5v8l9 5 9-5zM3 8l9 5 9-5M12 13v8',cartin:'M6 6h15l-2 9H8zM6 6L5 3H2M9 20h.01M18 20h.01',layers:'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5',
+ receipt:'M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6',users:'M9 11a3 3 0 100-6 3 3 0 000 6zM3 20a6 6 0 0112 0M17 11a3 3 0 100-6M21 20a5 5 0 00-4-5',
+ wallet:'M3 7h18v12H3zM3 7l3-3h12M16 13h2',tag:'M3 12V3h9l9 9-9 9z',truck:'M2 6h11v10H2zM13 9h5l3 3v4h-8M6 18h.01M17 18h.01',phone:'M7 2h10v20H7zM11 18h2',
+ chart:'M4 20V10M10 20V4M16 20v-8M22 20H2',gear:'M12 9a3 3 0 100 6 3 3 0 000-6M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2',cloud:'M7 18a5 5 0 110-10 6 6 0 0111 2 4 4 0 010 8z'};
+const NAV=[
+ ['Overview',[['dash','home','Dashboard'],]],
+ ['Trade',[['orders','cartin','Incoming Orders','inord'],['deliv','truck','Delivery','delivery'],['sales','receipt','Sales / Invoices'],['purch','cartin','Purchases'],['stock','layers','Stock'],['items','box','Items']]],
+ ['People & money',[['cust','users','Customers'],['pay','wallet','Recovery & Payments']]],
+ ['Modules',[['schemes','tag','Schemes & Claims','schemes'],['field','users','Field Sales','salesman'],['phone','phone','Mobile App Preview','app']]],
+ ['Insights & setup',[['rep','chart','Reports'],['set','gear','Settings & Modules'],['plat','cloud','Platform Admin (SaaS)']]]
+];
+const UR={Dashboard:'ڈیش بورڈ',Sales:'فروخت',Purchases:'خریداری',Stock:'اسٹاک',Items:'اشیاء',Customers:'گاہک','Recovery & Payments':'وصولی اور ادائیگیاں','Schemes & Claims':'اسکیمیں اور کلیمز',Delivery:'ڈیلیوری','Field Sales':'فیلڈ سیلز','Mobile App Preview':'موبائل ایپ',Reports:'رپورٹس','Settings & Modules':'سیٹنگز',Overview:'جائزہ',Trade:'لین دین','People & money':'لوگ اور رقم',Modules:'ماڈیولز','Insights & setup':'رپورٹس و سیٹ اپ','Platform Admin (SaaS)':'پلیٹ فارم ایڈمن'};
+const t=s=>S.lang==='ur'&&UR[s]?UR[s]:s;
+const $=id=>document.getElementById(id);
+const R=n=>'Rs '+Math.round(n).toLocaleString('en-PK');
+const K=n=>n>=100000?(n/100000).toFixed(n>=1000000?1:2).replace(/\.?0+$/,'')+' lac':Math.round(n).toLocaleString('en-PK');
+const M=k=>!!S.mods[k];
+const LB=k=>S.labels[k];
+const items=()=>ITEMS[S.tenant].map(a=>({code:a[0],n:a[1],ur:a[2],cat:a[3],pack:a[4],conv:a[5],cost:a[6],price:a[7],stock:a[8],re:a[9],batch:a[10],exp:a[11],sch:a[12],bu:a[13]||'Pcs',ext:a[14]||''}));
+const custs=()=>CUST[S.tenant].map((a,i)=>({i,n:a[0],area:a[1],route:a[2],bal:a[3],lim:a[4],sm:a[5],od:a[6]}));
+function qtyTxt(it,base){const p=Math.floor(base/it.conv),r=base%it.conv;return M('units')&&it.conv>1?`${p} ${it.pack}${r?` + ${r} ${it.bu}`:''}`:`${base} ${it.bu}`}
+function toast(m){const e=$('toast');e.textContent=m;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',2200)}
+function openDrawer(h){$('drawer').innerHTML=h;$('drawer').classList.add('open');$('veil').classList.add('open')}
+function closeDrawer(){$('drawer').classList.remove('open');$('veil').classList.remove('open')}
+function openModal(h){$('mbody').innerHTML=h;$('modal').classList.add('open')}
+function closeModal(){$('modal').classList.remove('open')}
+const chip=(t,c='')=>`<span class="chip ${c}">${t}</span>`;
+function qr(seed){let s='';let x=seed*9301+49297;for(let i=0;i<21;i++)for(let j=0;j<21;j++){x=(x*1103515245+12345)&0x7fffffff;const f=(i<7&&j<7)||(i<7&&j>13)||(i>13&&j<7);if(f||x%3===0)s+=`<rect x="${j*4}" y="${i*4}" width="4" height="4"/>`}return `<svg viewBox="0 0 84 84" width="78" height="78" fill="#111">${s}</svg>`}
+
+/* ---------------- INIT / NAV ---------------- */
+function loadPreset(k){const p=PRESETS[k];S.tenant=k;S.mods={...p.mods};S.labels={...p.labels};S.cart=null;S.cust=0;S.cheques=null;S.claims=null;S.orders=null;S.ph={tab:'home',offline:false,pending:2,cart:{},shop:0};S.cfields=null;S.tab={}}
+function setTenant(k){loadPreset(k);S.page='dash';buildNav();render()}
+function setLang(l){S.lang=l;document.body.classList.toggle('ur',l==='ur');document.documentElement.dir=l==='ur'?'rtl':'ltr';buildNav();render()}
+function go(p){S.page=p;buildNav();render();window.scrollTo(0,0)}
+function buildNav(){
+  const p=PRESETS[S.tenant];$('tnName').textContent=p.name;$('tnTag').textContent=p.tag;$('tsel').value=S.tenant;
+  $('nav').innerHTML=NAV.map(g=>{const ls=g[1].filter(x=>!x[3]||(x[3]==='app'?(M('salesman')||M('delivery')):M(x[3])));return ls.length?`<h6>${t(g[0])}</h6>`+ls.map(x=>`<a class="${S.page===x[0]?'on':''}" onclick="go('${x[0]}')"><svg viewBox="0 0 24 24"><path d="${IC[x[1]]}"/></svg>${t(x[2])}</a>`).join(''):''}).join('')
+}
+function render(){const f=PAGES[S.page];if(!f||(S.page==='schemes'&&!M('schemes'))||(S.page==='field'&&!M('salesman'))||(S.page==='phone'&&!M('salesman')&&!M('delivery'))||(S.page==='orders'&&!M('inord'))||(S.page==='deliv'&&!M('delivery'))){S.page='dash'}$('page').innerHTML=PAGES[S.page]();if(AFTER[S.page])AFTER[S.page]();buildNav()}
+const tabs=(key,list,def)=>{const cur=S.tab[key]||def;return `<div class="tabs">${list.map(x=>`<a class="${cur===x[0]?'on':''}" onclick="S.tab['${key}']='${x[0]}';render()">${x[1]}</a>`).join('')}</div>`}
+const head=(h,s,btn='')=>`<div class="row" style="justify-content:space-between;margin-bottom:6px"><div><h1>${h}</h1><p class="sub">${s}</p></div><div class="row">${btn}</div></div>`;
+
+/* ---------------- SHARED GENERATORS ---------------- */
+function bars(vals,labels,w=520,h=170){const mx=Math.max(...vals);const bw=w/vals.length;return `<svg viewBox="0 0 ${w} ${h+24}" width="100%">${vals.map((v,i)=>{const bh=v/mx*h;return `<rect x="${i*bw+bw*.18}" y="${h-bh}" width="${bw*.64}" height="${bh}" rx="5" fill="var(--pri)" opacity="${i===5?1:.55}"/><text x="${i*bw+bw/2}" y="${h+16}" font-size="11" text-anchor="middle" fill="#6b7280">${labels[i]}</text><text x="${i*bw+bw/2}" y="${h-bh-5}" font-size="10.5" text-anchor="middle" fill="#1b2333">${v}k</text>`}).join('')}</svg>`}
+function invoices(){const cs=custs();const nm=S.tenant==='dist'?'AN':S.tenant==='hw'?'KH':'BE';const amts=[84200,36750,152400,9800,64300,118900,27450,73100];return amts.map((a,i)=>{const c=cs[i%cs.length];const st=i%5===3?'Unpaid':i%4===1?'Partial':'Paid';return {no:`${nm}-24${1090-i}`,d:`${5-Math.floor(i/3)} Oct`,c:c.n,a,paid:st==='Paid'?a:st==='Partial'?Math.round(a*.4):0,st,by:M('salesman')?c.sm:M('inord')?'Van delivery':'Counter',fbr:'FBR-'+(77310+i*13)}})}
+function chequesInit(){if(!S.cheques)S.cheques=[['CHQ-884102','Madni Mart','HBL Multan Cantt',150000,'12 Oct','Received'],['CHQ-220918','Haji Younas Kiryana','Meezan Bosan Rd',75000,'08 Oct','Deposited'],['CHQ-551230','Al-Madina Mart','UBL Nawan Shehr',120000,'03 Oct','Bounced'],['CHQ-317702','Chaudhry General Store','Allied Hussain Agahi',90000,'20 Oct','Received'],['PAY-0091','→ '+SUPP[S.tenant][0],'Bank Alfalah',250000,'15 Oct','Issued']].map(x=>({id:x[0],p:x[1],bank:x[2],amt:x[3],due:x[4],st:x[5]}))}
+function claimsInit(){if(!S.claims)S.claims=[['Tapal Tea','Buy 5 Ctn get 12 packs · Sep','TP-190',62,31000,'Pending'],['Nestlé Pakistan','Buy 10 Ctn get 1 Ctn · Sep','NE-MP1L',18,71280,'Submitted'],['Shan Foods','3% trade discount · Aug','—',0,46500,'Settled'],['Dalda Foods','Buy 5 Ctn get 6 packs · Sep','DA-1L',22,29040,'Pending'],['Unilever','Display & visibility · Q3','—',0,85000,'Submitted']].map(x=>({co:x[0],sc:x[1],it:x[2],q:x[3],amt:x[4],st:x[5]}))}
+function ordersInit(){if(!S.orders){const cs=custs();const it=items();const rows=[[0,64200,'Booked',{credit:64200}],[1,22400,'Booked',{cod:22400}],[2,118000,'Loaded',{co:70000,credit:48000}],[3,45900,'Loaded',{cod:20000,credit:25900}],[4,38800,'Out',{cod:38800}],[5,91500,'Out',{co:91500}],[6,27150,'Delivered',{cod:27150}],[7,52000,'Delivered',{cod:12000,co:40000}]];
+ S.orders=rows.map((x,i)=>{const c=cs[x[0]%cs.length];return {no:(S.tenant==='dist'?'CO-':'SO-')+(7710+i),c:c.n,r:c.route.split(' – ')[0],a:x[1],st:x[2],sp:x[3],bal:c.bal,lines:[0,1,2].map(k=>{const t=it[(i+k)%it.length];return [t.n,(k+2+i%3)+' '+t.pack]})}})}}
+const cod=o=>o.sp.cod||0;
+const payChip=o=>{const e=Object.entries(o.sp).filter(x=>x[1]>0);const one=e.length===1;const nm={cod:['Cash on delivery','ok'],credit:['Credit','info'],co:['Paid to company','']};return e.map(([k,v])=>chip(nm[k][0]+(one?'':' '+K(v)),nm[k][1])).join(' ')};
+
+/* ---------------- PAGES ---------------- */
+const PAGES={}, AFTER={};
+
+PAGES.dash=()=>{
+ const it=items(),cs=custs();const low=it.filter(i=>i.stock<i.re);const near=it.filter(i=>i.exp&&i.exp<'2026-12-01');
+ const rec=cs.reduce((s,c)=>s+c.bal,0);const k=S.tenant==='dist'?1:S.tenant==='hw'?.45:.22;
+ const over=cs.filter(c=>c.bal>c.lim&&c.lim);
+ return head(t('Dashboard'),`Good morning · Sunday, 5 October 2026`,`<button class="btn g" onclick="go('sales')">+ New invoice</button><button class="btn" onclick="go('purch')">+ New purchase</button>`)+
+ `<div class="grid g4">
+  <div class="card kpi"><small>Today's sales</small><b>${R(702000*k)}</b><i class="up">▲ 12% vs yesterday</i></div>
+  <div class="card kpi"><small>Cash received today</small><b>${R(318500*k)}</b><i class="up">▲ recovery ${R(96000*k)}</i></div>
+  <div class="card kpi"><small>Receivables (udhaar)</small><b>${R(rec)}</b><i class="dn">${over.length} over credit limit</i></div>
+  <div class="card kpi"><small>Payable to ${LB('suppliers')}</small><b>${R(1840000*k)}</b><i>due this week: ${R(450000*k)}</i></div>
+  <div class="card kpi"><small>Low stock items</small><b>${low.length}</b><i class="dn">needs reorder</i></div>
+  ${M('batch')?`<div class="card kpi"><small>Near-expiry (60 days)</small><b>${near.length}</b><i class="dn">${near.map(n=>n.n.split(' ')[0]).join(', ')}</i></div>`:''}
+  ${M('delivery')?(ordersInit(),`<div class="card kpi"><small>Orders to deliver</small><b>${S.orders.filter(o=>o.st!=='Delivered').length}</b><i>${S.orders.filter(o=>o.st==='Booked').length} not yet loaded</i></div><div class="card kpi"><small>Cash to collect on delivery</small><b>${R(S.orders.filter(o=>o.st!=='Delivered').reduce((s,o)=>s+cod(o),0))}</b><i>rest is credit / paid to company</i></div>`):''}
+  ${M('schemes')?`<div class="card kpi"><small>Pending company claims</small><b>${R(60040)}</b><i>2 claims to submit</i></div>`:''}
+  ${M('cheques')?`<div class="card kpi"><small>Cheques due this week</small><b>${R(240000*k)}</b><i>1 bounced – follow up</i></div>`:''}
+ </div>
+ <div class="grid g2" style="margin-top:14px">
+  <div class="card"><h3>Sales – last 7 days (Rs thousand)</h3>${bars(SALES7[S.tenant],DAYS)}</div>
+  <div class="card"><h3>Needs attention</h3>
+   ${over.slice(0,2).map(c=>`<div class="mod"><div><b>${c.n}</b><small>Over credit limit by ${R(c.bal-c.lim)}</small></div>${chip('Credit','bad')}</div>`).join('')}
+   ${low.slice(0,2).map(i=>`<div class="mod"><div><b>${i.n}</b><small>${qtyTxt(i,i.stock)} left · reorder at ${qtyTxt(i,i.re)}</small></div>${chip('Low stock','warn')}</div>`).join('')}
+   ${M('batch')&&near[0]?`<div class="mod"><div><b>${near[0].n}</b><small>Batch ${near[0].batch} expires ${near[0].exp}</small></div>${chip('Expiring','warn')}</div>`:''}
+   ${M('cheques')?`<div class="mod"><div><b>Cheque CHQ-551230 bounced</b><small>Al-Madina Mart · ${R(120000)}</small></div>${chip('Bounced','bad')}</div>`:''}
+  </div></div>
+ <div class="grid g2" style="margin-top:14px">
+  <div class="card"><h3>Top customers this month</h3>${cs.slice(0,5).map((c,i)=>{const v=[88,71,64,52,40][i];return `<div style="margin-bottom:9px"><div class="row" style="justify-content:space-between"><span>${c.n}</span><b>${R(v*10000*k)}</b></div><div class="bar"><i style="width:${v}%"></i></div></div>`}).join('')}</div>
+  <div class="card"><h3>Top items this month</h3>${it.slice(0,5).map((c,i)=>{const v=[90,74,61,48,35][i];return `<div style="margin-bottom:9px"><div class="row" style="justify-content:space-between"><span>${c.n}</span><b>${Math.round(v*3*k)} ${c.pack}</b></div><div class="bar"><i style="width:${v}%"></i></div></div>`}).join('')}</div></div>`};
+
+/* ---- ITEMS ---- */
+PAGES.items=()=>{const it=items();return head('Items','Product catalogue with units, price lists and custom fields.',`<button class="btn g" onclick="toast('Excel import wizard would open here')">Import Excel</button><button class="btn" onclick="itemForm()">+ Add item</button>`)+
+ `<div class="card tw"><table><thead><tr><th>Code</th><th>Item</th><th>Category</th>${M('units')?'<th>Packing</th>':''}<th class="num">Cost</th><th class="num">Sale price</th>${M('variants')?'<th>Variants / extra</th>':''}${M('batch')?'<th>Tracking</th>':''}${M('schemes')?'<th>Scheme</th>':''}</tr></thead><tbody>
+ ${it.map((x,i)=>`<tr class="cl" onclick="itemForm(${i})"><td>${x.code}</td><td><b>${x.n}</b><br><small style="color:var(--mut)">${x.ur}</small></td><td>${x.cat}</td>${M('units')?`<td>1 ${x.pack} = ${x.conv} ${x.bu}</td>`:''}<td class="num">${R(x.cost)}</td><td class="num">${R(x.price)}<small style="color:var(--mut)"> /${x.bu}</small></td>${M('variants')?`<td>${x.ext||'—'}</td>`:''}${M('batch')?`<td>${chip('Batch + Expiry','info')}</td>`:''}${M('schemes')?`<td>${x.sch?chip(`Buy ${x.sch[0]} ${x.pack}, get ${x.sch[1]} free`,'ok'):'—'}</td>`:''}</tr>`).join('')}</tbody></table></div>`};
+function itemForm(i){const x=i!=null?items()[i]:null;const cf=cfields();
+ openDrawer(`<div class="row" style="justify-content:space-between"><h2 style="margin:0">${x?x.n:'New item'}</h2><button class="btn g s" onclick="closeDrawer()">Close</button></div>
+ <div class="fg" style="margin-top:14px"><div><label class="l">Item name (English)</label><input type="text" value="${x?x.n:''}"></div><div><label class="l">نام (اردو)</label><input type="text" value="${x?x.ur:''}" style="direction:rtl"></div>
+ <div><label class="l">Code / barcode</label><input type="text" value="${x?x.code:''}" placeholder="Scan or type"></div><div><label class="l">Category</label><input type="text" value="${x?x.cat:''}"></div></div>
+ ${M('units')?`<div class="card" style="margin-top:14px;background:#f8fafb"><h3>Units of measure</h3><div class="fg"><div><label class="l">Base unit</label><input type="text" value="${x?x.bu:'Pcs'}"></div><div><label class="l">Packing unit</label><input type="text" value="${x?x.pack:LB('packTitle')}"></div><div><label class="l">1 pack contains</label><input type="number" value="${x?x.conv:12}"></div></div><p class="sub" style="margin:8px 0 0">Buy in <b>${x?x.pack:'Carton'}</b>, sell in <b>${x?x.pack:'Carton'}</b> or loose <b>${x?x.bu:'Pcs'}</b>. Stock shows as “${x?qtyTxt({...x,conv:x.conv,pack:x.pack,bu:x.bu},x.stock+5):'12 Carton + 5 Pcs'}”.</p></div>`:''}
+ <div class="card" style="margin-top:14px;background:#f8fafb"><h3>Prices</h3><div class="fg"><div><label class="l">Cost price</label><input type="number" value="${x?x.cost:''}"></div><div><label class="l">Retail / trade price</label><input type="number" value="${x?x.price:''}"></div><div><label class="l">Wholesale price list</label><input type="number" value="${x?Math.round(x.price*.97):''}"></div><div><label class="l">GST</label><select class="f"><option>18% Standard</option><option>Reduced / exempt</option></select></div></div></div>
+ ${M('batch')?`<div class="mod"><div><b>Track batch & expiry</b><small>Ask for batch number and expiry on every purchase.</small></div><div class="tog on" onclick="this.classList.toggle('on')"></div></div>`:''}
+ ${M('serial')?`<div class="mod"><div><b>Track serial number & warranty</b><small>Serial captured at sale; warranty card printed.</small></div><div class="tog ${x&&x.ext.includes('Serial')?'on':''}" onclick="this.classList.toggle('on')"></div></div>`:''}
+ <div class="card" style="margin-top:14px;background:#f8fafb"><h3>Custom fields <small style="font-weight:400;color:var(--mut)">(added by admin in Settings)</small></h3><div class="fg">${cf.map(f=>`<div><label class="l">${f}</label><input type="text"></div>`).join('')}</div></div>
+ <div class="row" style="margin-top:16px"><button class="btn" onclick="closeDrawer();toast('Item saved')">Save item</button><button class="btn g" onclick="closeDrawer()">Cancel</button></div>`)}
+function cfields(){if(!S.cfields)S.cfields=S.tenant==='dist'?['Shelf life (days)','Barcode (Pack)','Company item code']:S.tenant==='hw'?['Size','Gauge','Material']:['Wattage','Voltage','Warranty (months)'];return S.cfields}
+
+/* ---- STOCK ---- */
+PAGES.stock=()=>{const it=items();const tv=it.reduce((s,x)=>s+x.stock*x.cost,0);
+ return head('Stock','Live stock by item. Every movement is recorded; nothing changes without a document.',`<button class="btn g" onclick="toast('Stock count sheet generated')">Stocktake</button>${M('branches')?`<button class="btn g" onclick="toast('Transfer form')">Transfer</button>`:''}<button class="btn" onclick="adjForm()">Adjust stock</button>`)+
+ `<div class="grid g4" style="margin-bottom:14px"><div class="card kpi"><small>Stock value (at cost)</small><b>${R(tv)}</b></div><div class="card kpi"><small>Items</small><b>${it.length}</b></div><div class="card kpi"><small>Low stock</small><b>${it.filter(i=>i.stock<i.re).length}</b></div>${M('batch')?`<div class="card kpi"><small>Expiring ≤ 60 days</small><b>${it.filter(i=>i.exp&&i.exp<'2026-12-01').length}</b></div>`:''}</div>
+ <div class="card tw"><table><thead><tr><th>Item</th>${M('branches')?'<th>Location</th>':''}<th>In stock</th><th>Reorder level</th>${M('batch')?'<th>Batch / expiry</th>':''}<th class="num">Value</th><th>Status</th></tr></thead><tbody>
+ ${it.map((x,i)=>{const low=x.stock<x.re;const nx=x.exp&&x.exp<'2026-12-01';return `<tr class="cl" onclick="stockDetail(${i})"><td><b>${x.n}</b></td>${M('branches')?'<td>Main godown</td>':''}<td>${qtyTxt(x,x.stock)}</td><td>${qtyTxt(x,x.re)}</td>${M('batch')?`<td>${x.batch} · ${x.exp}</td>`:''}<td class="num">${R(x.stock*x.cost)}</td><td>${low?chip('Low','bad'):nx?chip('Near expiry','warn'):chip('OK','ok')}</td></tr>`}).join('')}</tbody></table></div>`};
+function stockDetail(i){const x=items()[i];const mv=[['05 Oct','Sale AN-241090','−',Math.round(x.conv*1.5)],['04 Oct','Sale AN-241087','−',x.conv*2],['03 Oct','Purchase GRN-1180','+',x.conv*10],['02 Oct','Sales return','+',Math.max(1,Math.round(x.conv/6))],['01 Oct','Damage adjustment','−',Math.max(1,Math.round(x.conv/12))]];
+ openDrawer(`<div class="row" style="justify-content:space-between"><h2 style="margin:0">${x.n}</h2><button class="btn g s" onclick="closeDrawer()">Close</button></div><p class="sub">${x.code} · on hand <b>${qtyTxt(x,x.stock)}</b> · value ${R(x.stock*x.cost)}</p>
+ ${M('batch')?`<div class="card" style="margin-bottom:12px"><h3>Batches (sold oldest-expiry first)</h3><table><tr><th>Batch</th><th>Expiry</th><th class="num">Qty</th></tr><tr><td>${x.batch}</td><td>${x.exp}</td><td class="num">${qtyTxt(x,Math.round(x.stock*.7))}</td></tr><tr><td>${x.batch.replace(/\d$/,'9')}</td><td>2027-06-30</td><td class="num">${qtyTxt(x,Math.round(x.stock*.3))}</td></tr></table></div>`:''}
+ <div class="card"><h3>Stock ledger</h3><table><tr><th>Date</th><th>Document</th><th class="num">Qty (${x.bu})</th></tr>${mv.map(m=>`<tr><td>${m[0]}</td><td>${m[1]}</td><td class="num" style="color:${m[2]==='+'?'var(--ok)':'var(--bad)'}">${m[2]}${m[3]}</td></tr>`).join('')}</table></div>`)}
+function adjForm(){openModal(`<h2 style="margin-top:0">Stock adjustment</h2><div class="fg"><div><label class="l">Item</label><select class="f">${items().map(x=>`<option>${x.n}</option>`).join('')}</select></div><div><label class="l">Quantity (− for loss)</label><input type="number" value="-6"></div><div><label class="l">Reason</label><select class="f"><option>Damaged / broken</option><option>Expired</option><option>Theft / loss</option><option>Found in count</option></select></div></div><p class="note" style="margin-top:12px">Adjustments above Rs 10,000 need owner approval.</p><div class="row" style="margin-top:14px"><button class="btn" onclick="closeModal();toast('Adjustment sent for approval')">Submit</button><button class="btn g" onclick="closeModal()">Cancel</button></div>`)}
+
+/* ---- PURCHASES ---- */
+PAGES.purch=()=>{const sp=SUPP[S.tenant];const rows=[['GRN-1180','03 Oct',sp[0],486000,'Received'],['GRN-1176','28 Sep',sp[2],640000,'Received'],['GRN-1171','22 Sep',sp[Math.min(3,sp.length-1)],318000,'Part received']];
+ const cur=S.tab.pu||'list';
+ return head('Purchases',`Order from ${LB('suppliers').toLowerCase()}, receive stock, record bills and payments.`,`<button class="btn" onclick="S.tab.pu='new';render()">+ New purchase</button>`)+
+ tabs('pu',[['list','Purchase documents'],['new','New purchase']],'list')+(cur==='list'?
+ `<div class="card tw"><table><thead><tr><th>No.</th><th>Date</th><th>${LB('supplier')}</th><th class="num">Amount</th><th>Status</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td class="num">${R(r[3])}</td><td>${chip(r[4],r[4]==='Received'?'ok':r[4]==='Ordered'?'info':'warn')}</td><td><button class="btn g s" onclick="toast('Opening ${r[0]}')">Open</button></td></tr>`).join('')}</tbody></table></div>`:purchForm())};
+let PL=null;
+function purchForm(){const it=items();if(!PL||PL.t!==S.tenant)PL={t:S.tenant,l:it.slice(0,3).map((x,i)=>({c:x.code,q:[10,6,20][i],b:S.tenant==='dist'?[0,2,1][i]:0}))};
+ return `<div class="card"><div class="fg"><div><label class="l">${LB('supplier')}</label><select class="f">${SUPP[S.tenant].map(s=>`<option>${s}</option>`).join('')}</select></div><div><label class="l">Supplier bill no.</label><input type="text" value="B-77412"></div><div><label class="l">Date</label><input type="date" value="2026-10-05"></div></div>
+ <div class="tw" style="margin-top:14px"><table><thead><tr><th>Item</th><th>Qty (${M('units')?'packs':'units'})</th>${M('schemes')?'<th>Free / bonus packs</th>':''}<th class="num">Cost / pack</th>${M('batch')?'<th>Batch</th><th>Expiry</th>':''}<th class="num">Amount</th></tr></thead><tbody>
+ ${PL.l.map((r,i)=>{const x=it.find(a=>a.code===r.c);return `<tr><td><b>${x.n}</b></td><td style="width:90px"><input type="number" value="${r.q}" oninput="PL.l[${i}].q=+this.value;purchTot()"></td>${M('schemes')?`<td style="width:90px"><input type="number" value="${r.b}" oninput="PL.l[${i}].b=+this.value;purchTot()"></td>`:''}<td class="num">${R(x.cost*x.conv)}</td>${M('batch')?`<td><input type="text" value="${x.batch||'NEW'}" style="width:90px"></td><td><input type="date" value="${x.exp||'2027-06-01'}"></td>`:''}<td class="num" id="pl${i}"></td></tr>`}).join('')}</tbody></table></div>
+ <div class="row" style="justify-content:space-between;margin-top:12px"><button class="btn g s" onclick="toast('Item picker / barcode scan')">+ Add item</button><div style="text-align:end"><div>Total payable: <b id="ptot"></b></div>${M('schemes')?`<small style="color:var(--mut)" id="pbon"></small>`:''}</div></div>
+ <div class="row" style="margin-top:14px"><button class="btn" onclick="toast('Goods received. Stock updated, supplier ledger credited.');S.tab.pu='list';render()">Receive & save</button></div></div>`}
+function purchTot(){const it=items();let tot=0,bon=0;PL.l.forEach((r,i)=>{const x=it.find(a=>a.code===r.c);const a=r.q*x.cost*x.conv;tot+=a;bon+=r.b*x.cost*x.conv;const e=$('pl'+i);if(e)e.textContent=R(a)});if($('ptot'))$('ptot').textContent=R(tot);if($('pbon'))$('pbon').textContent=`Includes ${R(bon)} worth of free goods under company scheme – tracked as claim`}
+AFTER.purch=()=>{if((S.tab.pu||'list')==='new')purchTot()};
+
+/* ---- SALES ---- */
+PAGES.sales=()=>{const cur=S.tab.sa||'list';const inv=invoices();
+ return head('Sales',M('salesman')?'Invoices from counter, salesman orders and deliveries.':'Invoices and counter sales.',`<button class="btn" onclick="S.tab.sa='new';render()">+ New invoice</button>`)+
+ tabs('sa',[['list','Invoices'],['new','Quick invoice'],...(M('salesman')?[['ord','Salesman orders']]:[])],'list')+
+ (cur==='list'?`<div class="card tw"><table><thead><tr><th>Invoice</th><th>Date</th><th>Customer</th><th>${M('salesman')?'Salesman':M('inord')?'Channel':'Counter'}</th><th class="num">Amount</th><th class="num">Balance</th><th>Status</th>${M('fbr')?'<th>FBR</th>':''}</tr></thead><tbody>${inv.map(v=>`<tr class="cl" onclick="invPreview('${v.no}',${v.a},'${v.c.replace(/'/g,"\\'")}')"><td><b>${v.no}</b></td><td>${v.d}</td><td>${v.c}</td><td>${v.by}</td><td class="num">${R(v.a)}</td><td class="num">${R(v.a-v.paid)}</td><td>${chip(v.st,v.st==='Paid'?'ok':v.st==='Partial'?'warn':'bad')}</td>${M('fbr')?`<td>${chip('Reported','ok')}</td>`:''}</tr>`).join('')}</tbody></table></div>`
+ :cur==='ord'?`<div class="card tw"><table><thead><tr><th>Order</th><th>Shop</th><th>Booked by</th><th class="num">Amount</th><th>Status</th><th></th></tr></thead><tbody>${[['SO-3311','Chaudhry General Store','Imran',64200,'Pending approval'],['SO-3312','Bismillah Karyana','Imran',22400,'Approved'],['SO-3313','Madni Mart','Bilal',118000,'Credit limit exceeded']].map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td class="num">${R(r[3])}</td><td>${chip(r[4],r[4]==='Approved'?'ok':r[4].startsWith('Credit')?'bad':'warn')}</td><td><button class="btn g s" onclick="toast('Order converted to invoice')">Make invoice</button></td></tr>`).join('')}</tbody></table></div>`:quickInv())};
+function ensureCart(){if(!S.cart){const it=items();S.cart=it.slice(0,3).map((x,i)=>({c:x.code,u:i===2?'b':'p',q:[6,2,3][i]}))}}
+function quickInv(){ensureCart();const it=items(),cs=custs();
+ return `<div class="grid" style="grid-template-columns:minmax(0,2fr) minmax(280px,1fr);gap:14px"><div class="card"><div class="fg"><div><label class="l">Customer</label><select class="f" onchange="S.cust=+this.value;render()">${cs.map(c=>`<option value="${c.i}" ${c.i===S.cust?'selected':''}>${c.n}</option>`).join('')}</select></div><div><label class="l">Price list</label><select class="f"><option>Wholesale</option><option>Retail</option></select></div>${M('salesman')?`<div><label class="l">${LB('staff')}</label><select class="f"><option>Imran</option><option>Bilal</option><option>Counter sale</option></select></div>`:''}</div>
+ <div class="tw" style="margin-top:12px"><table><thead><tr><th>Item</th><th>Qty</th>${M('units')?'<th>Unit</th>':''}<th class="num">Rate / ${'unit'}</th><th class="num">Amount</th><th></th></tr></thead><tbody id="cartRows"></tbody></table></div>
+ <div class="row" style="margin-top:10px"><select class="sel" id="addIt">${it.map(x=>`<option value="${x.code}">${x.n}</option>`).join('')}</select><button class="btn g s" onclick="S.cart.push({c:$('addIt').value,u:'p',q:1});quickRows()">+ Add</button><span style="color:var(--mut);font-size:12px">or scan barcode</span></div></div>
+ <div class="card" id="sumBox"></div></div>`}
+function quickRows(){const it=items();$('cartRows').innerHTML=S.cart.map((r,i)=>{const x=it.find(a=>a.code===r.c);const base=r.q*(r.u==='b'||!M('units')?1:x.conv);const rate=x.price*(r.u==='b'||!M('units')?1:x.conv);const free=M('schemes')&&x.sch?Math.floor(base/(x.sch[0]*x.conv))*x.sch[1]:0;
+ return `<tr><td><b>${x.n}</b>${free?`<br>${chip('Scheme: +'+free+' '+x.bu+' free','ok')}`:''}</td><td style="width:80px"><input type="number" value="${r.q}" min="0" oninput="S.cart[${i}].q=+this.value;quickSum()"></td>${M('units')?`<td style="width:110px"><select class="f" onchange="S.cart[${i}].u=this.value;quickRows()"><option value="p" ${r.u==='p'?'selected':''}>${x.pack}</option><option value="b" ${r.u==='b'?'selected':''}>${x.bu}</option></select></td>`:''}<td class="num">${R(rate)}</td><td class="num">${R(r.q*rate)}</td><td><button class="btn g s" onclick="S.cart.splice(${i},1);quickRows()">✕</button></td></tr>`}).join('');quickSum()}
+function cartTotals(){const it=items();let sub=0;S.cart.forEach(r=>{const x=it.find(a=>a.code===r.c);sub+=r.q*x.price*(r.u==='b'||!M('units')?1:x.conv)});const d=sub*S.disc/100;const net=sub-d;const gst=M('fbr')?net*.18:0;return{sub,d,gst,tot:net+gst}}
+function quickSum(){const c=custs()[S.cust];const T=cartTotals();const paid=S.pay==='cash'?T.tot:S.pay==='credit'?0:Math.min(S.paid,T.tot);const newBal=c.bal+T.tot-paid;const over=c.lim&&newBal>c.lim;
+ $('sumBox').innerHTML=`<h3>Summary</h3><div class="row" style="justify-content:space-between"><span>Subtotal</span><b>${R(T.sub)}</b></div><div class="row" style="justify-content:space-between;margin:6px 0"><span>Discount %</span><input type="number" value="${S.disc}" style="width:70px" oninput="S.disc=+this.value;quickSum()"></div>${M('fbr')?`<div class="row" style="justify-content:space-between"><span>GST 18%</span><b>${R(T.gst)}</b></div>`:''}<hr style="border:0;border-top:1px solid var(--line)"><div class="row" style="justify-content:space-between;font-size:17px"><b>Total</b><b>${R(T.tot)}</b></div>
+ <label class="l" style="margin-top:12px">Payment</label><div class="row">${['cash','credit','part'].map(p=>`<button class="btn ${S.pay===p?'':'g'} s" onclick="S.pay='${p}';quickSum()">${p==='cash'?'Cash':p==='credit'?'Credit (udhaar)':'Part payment'}</button>`).join('')}</div>
+ ${S.pay==='part'?`<input type="number" value="${S.paid}" placeholder="Amount received" style="margin-top:8px" oninput="S.paid=+this.value;quickSum()">`:''}
+ <div style="margin-top:10px;font-size:12.5px">Previous balance: <b>${R(c.bal)}</b> · Credit limit: <b>${c.lim?R(c.lim):'Cash only'}</b><br>New balance: <b>${R(newBal)}</b></div>${over?`<p class="note" style="background:var(--badbg);border-color:#fecaca;color:var(--bad);margin:10px 0 0">⚠ Over credit limit by ${R(newBal-c.lim)}. Manager approval needed.</p>`:''}
+ <div class="row" style="margin-top:14px"><button class="btn" onclick="invPreview('${S.tenant==='dist'?'AN':S.tenant==='hw'?'KH':'BE'}-241091',${Math.round(T.tot)},'${c.n.replace(/'/g,"\\'")}',true)">Save & print</button><button class="btn g" onclick="toast('Invoice sent on WhatsApp to customer')">WhatsApp</button></div>`}
+AFTER.sales=()=>{if((S.tab.sa||'list')==='new')quickRows()};
+function invPreview(no,amt,cust,live){const it=items();const lines=live?S.cart.map(r=>{const x=it.find(a=>a.code===r.c);const m=r.u==='b'||!M('units')?1:x.conv;return [x.n,`${r.q} ${r.u==='b'||!M('units')?x.bu:x.pack}`,x.price*m,r.q*x.price*m]}):it.slice(0,3).map((x,i)=>[x.n,`${[6,2,3][i]} ${x.pack}`,x.price*x.conv,[6,2,3][i]*x.price*x.conv]);
+ const sub=lines.reduce((s,l)=>s+l[3],0);const gst=M('fbr')?sub*.18:0;
+ openModal(`<div class="row" style="justify-content:space-between"><h3 style="margin:0">Invoice preview</h3><div class="row"><button class="btn g s" onclick="toast('Sent to printer (A4 / 80mm thermal)')">Print</button><button class="btn g s" onclick="toast('Shared on WhatsApp')">WhatsApp</button><button class="btn g s" onclick="closeModal()">Close</button></div></div>
+ <div class="inv card" style="margin-top:12px;border:2px dashed var(--line)"><div class="row" style="justify-content:space-between"><div><b style="font-size:16px">${PRESETS[S.tenant].name}</b><br>Multan, Pakistan${M('fbr')?'<br>NTN: 4521987-3 · STRN: 17-00-9876-123-45':''}</div><div style="text-align:end"><b>${M('fbr')?'SALES TAX INVOICE':'INVOICE'}</b><br>No: ${no}<br>Date: 05-Oct-2026</div></div>
+ <p style="margin:10px 0 4px">Bill to: <b>${cust}</b></p><table><tr><th>Item</th><th>Qty</th><th class="num">Rate</th><th class="num">Amount</th></tr>${lines.map(l=>`<tr><td>${l[0]}</td><td>${l[1]}</td><td class="num">${Math.round(l[2]).toLocaleString('en-PK')}</td><td class="num">${Math.round(l[3]).toLocaleString('en-PK')}</td></tr>`).join('')}</table>
+ <div class="row" style="justify-content:space-between;margin-top:10px;align-items:flex-end"><div>${M('fbr')?qr(amt)+'<br><small>FBR Invoice #: 7731'+(amt%900+100)+'</small>':''}</div><div style="text-align:end">Subtotal: ${R(sub)}<br>${M('fbr')?`GST 18%: ${R(gst)}<br>`:''}<b style="font-size:15px">Total: ${R(sub+gst)}</b></div></div>
+ ${M('serial')?'<p style="margin:8px 0 0"><small>Warranty: 2 years on fans. Keep this invoice as warranty proof.</small></p>':''}<p style="text-align:center;margin:8px 0 0"><small>Thank you for your business · شکریہ</small></p></div>`)}
+
+/* ---- CUSTOMERS ---- */
+PAGES.cust=()=>{const cs=custs();const tot=cs.reduce((s,c)=>s+c.bal,0);
+ return head(S.tenant==='dist'?'Customers (Shops)':'Customers','Customer ledgers, credit limits and recovery status.',`<button class="btn" onclick="toast('New customer form')">+ Add customer</button>`)+
+ `<div class="grid g4" style="margin-bottom:14px"><div class="card kpi"><small>Total receivable</small><b>${R(tot)}</b></div><div class="card kpi"><small>Over credit limit</small><b>${cs.filter(c=>c.lim&&c.bal>c.lim).length}</b></div><div class="card kpi"><small>Overdue &gt; 30 days</small><b>${cs.filter(c=>c.od>30).length}</b></div></div>
+ <div class="card tw"><table><thead><tr><th>Customer</th><th>${S.tenant==='dist'?'Route':'Type'}</th><th class="num">Balance</th><th style="width:180px">Credit used</th><th>Oldest due</th></tr></thead><tbody>${cs.map(c=>{const p=c.lim?Math.min(100,c.bal/c.lim*100):0;return `<tr class="cl" onclick="custLedger(${c.i})"><td><b>${c.n}</b><br><small style="color:var(--mut)">${c.area}</small></td><td>${c.route}</td><td class="num"><b>${R(c.bal)}</b></td><td>${c.lim?`<div class="bar"><i class="${p>100?'b':p>80?'w':''}" style="width:${p}%"></i></div><small>${Math.round(c.bal/c.lim*100)}% of ${R(c.lim)}</small>`:'<small>Cash only</small>'}</td><td>${c.od?chip(c.od+' days',c.od>45?'bad':c.od>30?'warn':''):'—'}</td></tr>`}).join('')}</tbody></table></div>`};
+function custLedger(i){const c=custs()[i];const b=c.bal;const a=[b*.35,b*.28,b*.22,b*.15].map(Math.round);
+ openDrawer(`<div class="row" style="justify-content:space-between"><h2 style="margin:0">${c.n}</h2><button class="btn g s" onclick="closeDrawer()">Close</button></div><p class="sub">${c.area} · ${c.route}${M('salesman')?' · '+c.sm:''} · 0300-6xx xxxx</p>
+ <div class="grid g3"><div class="card kpi"><small>Balance</small><b>${R(b)}</b></div><div class="card kpi"><small>Credit limit</small><b>${c.lim?R(c.lim):'—'}</b></div></div>
+ <div class="card" style="margin-top:12px"><h3>Aging</h3><div class="row" style="gap:6px">${['0–30','31–60','61–90','90+'].map((l,k)=>`<div style="flex:1;background:${k>1?'var(--badbg)':'#f4f5f7'};border-radius:8px;padding:8px"><small>${l} days</small><br><b>${K(a[k])}</b></div>`).join('')}</div></div>
+ <div class="card" style="margin-top:12px"><h3>Statement</h3><table><tr><th>Date</th><th>Entry</th><th class="num">Debit</th><th class="num">Credit</th></tr><tr><td>05 Oct</td><td>Invoice AN-241090</td><td class="num">${Math.round(b*.2).toLocaleString('en-PK')}</td><td></td></tr><tr><td>30 Sep</td><td>Receipt (cash)</td><td></td><td class="num">${Math.round(b*.1).toLocaleString('en-PK')}</td></tr><tr><td>22 Sep</td><td>Invoice AN-241044</td><td class="num">${Math.round(b*.3).toLocaleString('en-PK')}</td><td></td></tr><tr><td>14 Sep</td><td>Sales return CN-088</td><td></td><td class="num">${Math.round(b*.04).toLocaleString('en-PK')}</td></tr></table></div>
+ <div class="row" style="margin-top:14px"><button class="btn" onclick="recvForm('${c.n.replace(/'/g,"\\'")}')">Receive payment</button><button class="btn g" onclick="toast('Reminder sent on WhatsApp / SMS')">Send reminder</button><button class="btn g" onclick="toast('Statement PDF shared')">Share statement</button></div>`)}
+function recvForm(n){closeDrawer();openModal(`<h2 style="margin-top:0">Receive payment · ${n}</h2><div class="fg"><div><label class="l">Amount</label><input type="number" value="50000"></div><div><label class="l">Method</label><select class="f"><option>Cash</option>${M('cheques')?'<option>Cheque</option>':''}<option>Bank transfer / Raast</option><option>JazzCash / Easypaisa</option></select></div><div><label class="l">Reference</label><input type="text" placeholder="Cheque no. / txn id"></div></div><p class="note" style="margin-top:12px">Auto-allocated to the oldest invoices first. Receipt goes to the customer by WhatsApp.</p><div class="row" style="margin-top:14px"><button class="btn" onclick="closeModal();toast('Receipt saved & shared')">Save receipt</button><button class="btn g" onclick="closeModal()">Cancel</button></div>`)}
+
+/* ---- PAYMENTS ---- */
+PAGES.pay=()=>{const cs=custs().filter(c=>c.bal>0).sort((a,b)=>b.od-a.od);const cur=S.tab.py||'rec';chequesInit();
+ return head('Recovery & Payments','Collect udhaar, pay suppliers, manage cash'+(M('cheques')?' and cheques.':'.'))+
+ tabs('py',[['rec','Recovery list'],['cash','Cash book'],...(M('cheques')?[['chq','Cheques']]:[]),['exp','Expenses']],'rec')+
+ (cur==='rec'?`<div class="note" style="margin-bottom:12px">Recovery list is sorted by oldest due. ${M('salesman')?'Assign to a salesman and it appears in their app route.':''}</div><div class="card tw"><table><thead><tr><th>Customer</th><th class="num">Due</th><th>Overdue</th><th></th></tr></thead><tbody>${cs.map(c=>`<tr><td><b>${c.n}</b><br><small style="color:var(--mut)">${c.area}</small></td><td class="num">${R(c.bal)}</td><td>${chip(c.od+' days',c.od>45?'bad':c.od>30?'warn':'')}</td><td><button class="btn g s" onclick="recvForm('${c.n.replace(/'/g,"\\'")}')">Receive</button> <button class="btn g s" onclick="toast('Reminder sent')">Remind</button></td></tr>`).join('')}</tbody></table></div>`
+ :cur==='cash'?`<div class="grid g4" style="margin-bottom:12px"><div class="card kpi"><small>Opening cash</small><b>${R(85000)}</b></div><div class="card kpi"><small>Received today</small><b>${R(318500)}</b></div><div class="card kpi"><small>Paid today</small><b>${R(142000)}</b></div><div class="card kpi"><small>Cash in hand</small><b>${R(261500)}</b></div></div><div class="card tw"><table><thead><tr><th>Time</th><th>Entry</th><th class="num">In</th><th class="num">Out</th></tr></thead><tbody>${[['10:12','Sale AN-241090 (cash)',45000,0],['11:40','Receipt – Haji Younas',60000,0],['12:05','Fuel – delivery van',0,6500],['13:30','Payment – Tapal Tea (cash)',0,120000],['15:10','Receipt – Rizwan Traders',18000,0],['16:20',M('salesman')?'Salesman Imran – daily cash handover':'Van driver Akbar – delivery cash handover',195500,0]].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]?R(r[2]):''}</td><td class="num">${r[3]?R(r[3]):''}</td></tr>`).join('')}</tbody></table></div><div class="row" style="margin-top:12px"><button class="btn" onclick="toast('Day closed. Cash count matched.')">Close day</button></div>`
+ :cur==='chq'?`<div class="card tw"><table><thead><tr><th>Cheque</th><th>Party</th><th>Bank</th><th class="num">Amount</th><th>Due</th><th>Status</th><th></th></tr></thead><tbody>${S.cheques.map((c,i)=>`<tr><td><b>${c.id}</b></td><td>${c.p}</td><td>${c.bank}</td><td class="num">${R(c.amt)}</td><td>${c.due}</td><td>${chip(c.st,c.st==='Cleared'?'ok':c.st==='Bounced'?'bad':c.st==='Deposited'?'info':'warn')}</td><td>${c.st==='Received'?`<button class="btn g s" onclick="chq(${i},'Deposited')">Deposit</button>`:c.st==='Deposited'?`<button class="btn g s" onclick="chq(${i},'Cleared')">Clear</button> <button class="btn g s" onclick="chq(${i},'Bounced')">Bounce</button>`:c.st==='Bounced'?'<small>Customer balance restored</small>':''}</td></tr>`).join('')}</tbody></table></div>`
+ :`<div class="card tw"><table><thead><tr><th>Date</th><th>Category</th><th>Note</th><th class="num">Amount</th></tr></thead><tbody>${[['05 Oct','Fuel','Delivery vehicle',6500],['04 Oct','Salaries','Advance – Imran',20000],['03 Oct','Utilities','Electricity bill godown',48200],['01 Oct','Rent','Godown rent',90000]].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="num">${R(r[3])}</td></tr>`).join('')}</tbody></table></div>`)};
+function chq(i,s){S.cheques[i].st=s;toast(s==='Bounced'?'Cheque bounced. Customer ledger reversed, alert sent to owner.':'Cheque '+s.toLowerCase());render()}
+
+/* ---- SCHEMES ---- */
+PAGES.schemes=()=>{claimsInit();const cur=S.tab.sc||'about';const it=items().filter(x=>x.sch);
+ return head('Schemes & Claims','Track company promotions given to shops, and recover the cost from the company.')+
+ tabs('sc',[['about','How it works'],['sch','Active schemes'],['clm','Company claims']],'about')+
+ (cur==='about'?`<div class="grid g3"><div class="card"><h3>1 · Company gives a scheme</h3><p>Tapal announces: <b>“Buy 5 cartons, get 12 packs free”</b> for September. It is recorded once here.</p></div><div class="card"><h3>2 · Agency passes it to shops</h3><p>When a shop buys 5 cartons, the free 12 packs are added <b>automatically</b> on the invoice and deducted from stock. Salesmen see the offer in the app.</p></div><div class="card"><h3>3 · Agency claims it back</h3><p>At month end the system lists every free pack given under the scheme. Create a claim, submit, and track until the company pays by credit note or cash.</p></div></div><p class="note" style="margin-top:14px">Without this tracking, free goods given to shops become silent losses. Claims also catch schemes the company forgot to pay.</p>`
+ :cur==='sch'?`<div class="row" style="justify-content:flex-end;margin-bottom:10px"><button class="btn" onclick="toast('New scheme form')">+ New scheme</button></div><div class="card tw"><table><thead><tr><th>Item</th><th>Company</th><th>Offer</th><th>Valid</th><th>Claimable from company</th></tr></thead><tbody>${it.map(x=>`<tr><td><b>${x.n}</b></td><td>${x.n.split(' ')[0]}</td><td>Buy ${x.sch[0]} ${x.pack} → ${x.sch[1]} ${x.bu} free</td><td>1–31 Oct</td><td>${chip('Yes','ok')}</td></tr>`).join('')}<tr><td><b>All Shan products</b></td><td>Shan Foods</td><td>3% trade discount on monthly lifting > Rs 5 lac</td><td>Oct</td><td>${chip('Yes','ok')}</td></tr><tr><td><b>Surf Excel 1kg</b></td><td>Unilever</td><td>Rs 5 off per pack to shops (agency funded)</td><td>Oct</td><td>${chip('No','')}</td></tr></tbody></table></div>`
+ :`<div class="grid g4" style="margin-bottom:12px"><div class="card kpi"><small>Pending (not submitted)</small><b>${R(S.claims.filter(c=>c.st==='Pending').reduce((s,c)=>s+c.amt,0))}</b></div><div class="card kpi"><small>Submitted, awaiting payment</small><b>${R(S.claims.filter(c=>c.st==='Submitted').reduce((s,c)=>s+c.amt,0))}</b></div><div class="card kpi"><small>Settled this quarter</small><b>${R(S.claims.filter(c=>c.st==='Settled').reduce((s,c)=>s+c.amt,0))}</b></div></div><div class="card tw"><table><thead><tr><th>Company</th><th>Scheme</th><th class="num">Qty given free</th><th class="num">Claim amount</th><th>Status</th><th></th></tr></thead><tbody>${S.claims.map((c,i)=>`<tr><td><b>${c.co}</b></td><td>${c.sc}</td><td class="num">${c.q?c.q+' packs':'—'}</td><td class="num">${R(c.amt)}</td><td>${chip(c.st,c.st==='Settled'?'ok':c.st==='Submitted'?'info':'warn')}</td><td>${c.st==='Pending'?`<button class="btn g s" onclick="S.claims[${i}].st='Submitted';toast('Claim PDF generated & marked submitted');render()">Submit</button>`:c.st==='Submitted'?`<button class="btn g s" onclick="S.claims[${i}].st='Settled';toast('Credit note recorded in company ledger');render()">Mark settled</button>`:''}</td></tr>`).join('')}</tbody></table></div>`)};
+
+/* ---- DELIVERY ---- */
+PAGES.deliv=()=>{ordersInit();const cols=[['Booked','Ready to load'],['Loaded','Loaded on van'],['Out','Out for delivery'],['Delivered','Delivered']];
+ const exp=S.orders.filter(o=>o.st!=='Booked').reduce((s,o)=>s+cod(o),0);
+ return head('Delivery','From order to doorstep. Each order shows how it is paid, and what cash the driver collects.',`<button class="btn g" onclick="loadSheet()">Loading sheet</button>${M('van')?'<button class="btn g" onclick="vanModal()">Van stock</button>':''}${M('delivery')?'<button class="btn" onclick="go(\'phone\')">Open driver app</button>':''}`)+
+ `<div class="kan">${cols.map((c,ci)=>`<div><h4>${c[1]} <span class="chip">${S.orders.filter(o=>o.st===c[0]).length}</span></h4>${S.orders.map((o,i)=>o.st!==c[0]?'':`<div class="oc"><b>${o.no}</b> · ${o.r}<br>${o.c}<br><b>${R(o.a)}</b> ${payChip(o)}<div style="margin-top:6px">${c[0]!=='Delivered'?`<button class="btn s" onclick="S.orders[${i}].st='${cols[ci+1][0]}';render()">→ ${cols[ci+1][1]}</button>`:''}</div></div>`).join('')}</div>`).join('')}</div>
+ <div class="card" style="margin-top:14px"><h3>Cash-on-delivery reconciliation</h3><p class="sub" style="margin:0 0 8px">Only the “cash on delivery” part of an order is collected by the driver. The credit part goes to the shop's ledger; the part paid to the company needs no collection.</p><table><tr><th>Driver / van</th><th>Deliveries</th><th class="num">Cash to collect</th><th class="num">Handed over</th></tr><tr><td>Akbar (Suzuki Ravi)</td><td>6</td><td class="num">${R(exp)}</td><td class="num">${R(exp)}</td></tr><tr><td>Shafiq (Hilux)</td><td>4</td><td class="num">${R(96500)}</td><td class="num" style="color:var(--bad)">${R(94000)} (−2,500)</td></tr></table></div>`};
+function loadSheet(){ordersInit();const m={};S.orders.filter(o=>o.st==='Booked'||o.st==='Loaded').forEach(o=>o.lines.forEach(l=>{const q=parseInt(l[1]);m[l[0]]=(m[l[0]]||0)+q;m[l[0]+'#']=l[1].split(' ')[1]}));
+ openModal(`<h2 style="margin-top:0">Loading sheet · Van-2</h2><p class="sub">Everything to load for orders ready or loaded.</p><table><tr><th>Item</th><th class="num">Quantity</th></tr>${Object.keys(m).filter(k=>!k.endsWith('#')).map(k=>`<tr><td>${k}</td><td class="num"><b>${m[k]} ${m[k+'#']}</b></td></tr>`).join('')}</table><div class="row" style="margin-top:14px"><button class="btn" onclick="closeModal();toast('Loading sheet PDF ready')">Print / PDF</button><button class="btn g" onclick="closeModal()">Close</button></div>`)}
+
+/* ---- INCOMING ORDERS (from principal company) ---- */
+PAGES.orders=()=>{ordersInit();return head('Incoming Orders','Orders booked by the company\'s salesmen. The office enters them here; the agency delivers.',`<button class="btn" onclick="orderForm()">+ Enter order</button>`)+
+ `<p class="note" style="margin-bottom:12px">Later we can add Excel / WhatsApp import so orders don't need typing.</p><div class="card tw"><table><thead><tr><th>Company order</th><th>Shop</th><th>Items</th><th class="num">Amount</th><th>Payment</th><th>Status</th></tr></thead><tbody>${S.orders.map(o=>`<tr><td><b>${o.no}</b></td><td>${o.c}<br><small style="color:var(--mut)">${o.r}</small></td><td><small>${o.lines.map(l=>l[0].split(' ').slice(0,2).join(' ')+' × '+l[1]).join(', ')}</small></td><td class="num">${R(o.a)}</td><td>${payChip(o)}</td><td>${chip(o.st==='Booked'?'Received':o.st==='Out'?'Out for delivery':o.st==='Loaded'?'Loaded':'Delivered',o.st==='Delivered'?'ok':o.st==='Booked'?'warn':'info')}</td></tr>`).join('')}</tbody></table></div>`};
+let OF=null;const OFK=['cod','credit','co'],OFN={cod:'Cash on delivery',credit:'Credit (added to shop ledger)',co:'Already paid to company'};
+function ofCalc(){const it=items();OF.tot=OF.q.reduce((s,q,i)=>s+q*it[i].price*it[i].conv,0)}
+function ofEqual(){const n=OF.sel.length,e=Math.floor(OF.tot/n);OF.amt={cod:0,credit:0,co:0};OF.sel.forEach((k,i)=>OF.amt[k]=e+(i===0?OF.tot-e*n:0))}
+function ofScale(old){if(!old)return ofEqual();OF.sel.forEach(k=>OF.amt[k]=Math.round(OF.amt[k]*OF.tot/old));OF.amt[OF.sel[0]]+=OF.tot-OF.sel.reduce((s,k)=>s+OF.amt[k],0)}
+function orderForm(){ordersInit();OF={q:[4,2,3],sel:['cod','credit'],amt:{},tot:0,cust:0,no:'CO-'+(7710+S.orders.length)};ofCalc();ofEqual();ofRender()}
+function ofToggle(k){const i=OF.sel.indexOf(k);if(i>=0){if(OF.sel.length>1)OF.sel.splice(i,1)}else OF.sel.push(k);OF.sel.sort((a,b)=>OFK.indexOf(a)-OFK.indexOf(b));ofEqual();ofRender()}
+function ofQty(i,v){const old=OF.tot;OF.q[i]=Math.max(0,+v||0);ofCalc();ofScale(old);ofSync()}
+function ofChange(k,v){v=Math.max(0,Math.min(OF.tot,Math.round(+v||0)));const o=OF.sel.filter(x=>x!==k);if(!o.length)return ofSync();OF.amt[k]=v;const rest=OF.tot-v;if(o.length===1)OF.amt[o[0]]=rest;else{const b=Math.min(OF.amt[o[1]],rest);OF.amt[o[1]]=b;OF.amt[o[0]]=rest-b}ofSync()}
+function ofSync(){const it=items();OF.q.forEach((q,i)=>{const e=$('ofl'+i);if(e)e.textContent=R(q*it[i].price*it[i].conv)});$('oftot').textContent=R(OF.tot);
+ OF.sel.forEach(k=>{const n=$('ofn_'+k),s=$('ofs_'+k);if(n&&document.activeElement!==n)n.value=OF.amt[k];if(s){s.max=OF.tot;s.value=OF.amt[k]}const p=$('ofp_'+k);if(p)p.textContent=OF.tot?Math.round(OF.amt[k]/OF.tot*100)+'%':'0%'});
+ const sum=OF.sel.reduce((s,k)=>s+(OF.amt[k]||0),0),ok=sum===OF.tot&&OF.tot>0;$('ofst').innerHTML=ok?`<span style="color:var(--ok)">✓ ${R(sum)} of ${R(OF.tot)} allocated</span>`:`<span style="color:var(--bad)">${R(sum)} of ${R(OF.tot)} allocated</span>`;$('ofsave').disabled=!ok;
+ $('ofdrv').innerHTML=OF.amt.cod&&OF.sel.includes('cod')?`<b style="color:var(--ok)">COLLECT CASH ${R(OF.amt.cod)}</b>`:'<b style="color:#475467">NO CASH TO COLLECT</b>'}
+function ofRender(){const cs=custs(),it=items().slice(0,3);
+ openModal(`<h2 style="margin-top:0">Enter order from company</h2><div class="fg"><div><label class="l">Company order no.</label><input type="text" value="${OF.no}" oninput="OF.no=this.value"></div><div><label class="l">Shop</label><select class="f" onchange="OF.cust=+this.value">${cs.map((c,i)=>`<option value="${i}" ${i===OF.cust?'selected':''}>${c.n}</option>`).join('')}</select></div></div>
+ <table style="margin-top:12px"><tr><th>Item</th><th>Qty (${M('units')?'packs':'units'})</th><th class="num">Amount</th></tr>${it.map((x,i)=>`<tr><td>${x.n}</td><td style="width:90px"><input type="number" min="0" value="${OF.q[i]}" oninput="ofQty(${i},this.value)"></td><td class="num" id="ofl${i}"></td></tr>`).join('')}<tr><td colspan="2"><b>Order total</b></td><td class="num"><b id="oftot"></b></td></tr></table>
+ <div class="card" style="margin-top:12px;background:#f8fafb"><h3>How is this order paid? <small style="font-weight:400;color:var(--mut)">pick one, two or three</small></h3><div class="row" style="margin-bottom:10px">${OFK.map(k=>`<button class="btn s ${OF.sel.includes(k)?'':'g'}" onclick="ofToggle('${k}')">${OF.sel.includes(k)?'✓ ':''}${OFN[k]}</button>`).join('')}</div>
+ ${OF.sel.length===1?`<small style="color:var(--mut)">Whole order is <b>${OFN[OF.sel[0]]}</b>. Pick another type to split it.</small>`:OF.sel.map(k=>`<div style="margin-bottom:10px"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span>${OFN[k]} <small id="ofp_${k}" style="color:var(--mut)"></small></span><input type="number" id="ofn_${k}" min="0" style="width:130px" oninput="ofChange('${k}',this.value)"></div><input type="range" id="ofs_${k}" min="0" step="100" style="width:100%;accent-color:var(--pri)" oninput="ofChange('${k}',this.value)"></div>`).join('')}
+ <div id="ofst" style="font-weight:600"></div></div>
+ <div class="pc" style="margin-top:10px;background:#f4f5f7"><small style="color:var(--mut)">Driver will see:</small> <span id="ofdrv"></span></div>
+ <div class="row" style="margin-top:14px"><button class="btn" id="ofsave" onclick="ofSave()">Save order</button><button class="btn g" onclick="closeModal()">Cancel</button></div>`);ofSync()}
+function ofSave(){const cs=custs(),it=items(),c=cs[OF.cust];const sp={};OF.sel.forEach(k=>{if(OF.amt[k]>0)sp[k]=OF.amt[k]});
+ S.orders.unshift({no:OF.no,c:c.n,r:c.route.split(' – ')[0],a:OF.tot,st:'Booked',sp,bal:c.bal,lines:it.slice(0,3).map((x,i)=>[x.n,OF.q[i]+' '+x.pack])});closeModal();toast('Order saved. Ready to load.');render()}
+function vanModal(){openModal(`<h2 style="margin-top:0">Van-2 (Imran) · stock on van</h2><table><tr><th>Item</th><th>Issued</th><th>Sold</th><th>Expected back</th></tr>${items().slice(0,4).map((x,i)=>`<tr><td>${x.n}</td><td>${[20,15,10,12][i]} ${x.pack}</td><td>${[14,9,6,10][i]}</td><td><b>${[6,6,4,2][i]}</b></td></tr>`).join('')}</table><div class="row" style="margin-top:14px"><button class="btn" onclick="closeModal();toast('Van closed. Return stock recorded.')">End-of-day return</button><button class="btn g" onclick="closeModal()">Close</button></div>`)}
+
+/* ---- FIELD SALES (manager view) ---- */
+PAGES.field=()=>head('Field Sales','Live view of salesmen, routes, orders and collections.',`<button class="btn" onclick="go('phone')">Open salesman mobile app</button>`)+
+ `<div class="grid g2"><div class="card"><h3>Today's performance</h3><table><tr><th>${LB('staff')}</th><th>Visits</th><th class="num">Orders</th><th class="num">Collected</th><th>Target</th></tr>${[['Imran','Route A, C, D',14,18,'₨ 312,500',78],['Bilal','Route B',9,11,'₨ 148,000',54],['Usman','Route E',11,12,'₨ 96,200',63]].map(r=>`<tr><td><b>${r[0]}</b><br><small style="color:var(--mut)">${r[1]}</small></td><td>${r[2]}</td><td class="num">${r[3]}</td><td class="num">${r[4]}</td><td style="width:110px"><div class="bar"><i style="width:${r[5]}%"></i></div><small>${r[5]}%</small></td></tr>`).join('')}</table></div>
+ <div class="card"><h3>Live locations</h3><svg viewBox="0 0 400 220" width="100%" style="background:#e8efe9;border-radius:10px"><path d="M0 120 Q100 60 200 110 T400 90" stroke="#fff" stroke-width="9" fill="none"/><path d="M60 0 L120 220" stroke="#fff" stroke-width="6"/><path d="M280 0 L240 220" stroke="#fff" stroke-width="6"/><g fill="var(--pri)"><circle cx="150" cy="95" r="9"/><circle cx="270" cy="105" r="9"/><circle cx="90" cy="165" r="9"/></g><g font-size="11" fill="#1b2333"><text x="162" y="92">Imran · Hussain Agahi</text><text x="282" y="102">Bilal · Gulgasht</text><text x="102" y="168">Usman · Cantt</text></g></svg></div></div>
+ <div class="card" style="margin-top:14px"><h3>Route plan (assignable)</h3><table><tr><th>Route</th><th>Shops</th><th>${LB('staff')}</th><th>Visit days</th></tr>${[['Route A – Old City',28,'Imran','Mon / Thu'],['Route B – Colony',22,'Bilal','Tue / Fri'],['Route C – Bosan Rd',31,'Imran','Wed / Sat'],['Route D – Cantt',19,'Usman','Mon / Thu']].map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</table></div>`;
+
+/* ---- MOBILE APP PREVIEW ---- */
+PAGES.phone=()=>head('Salesman Mobile App','Tap through it like a real phone. Works offline and syncs when internet returns.')+
+ `<div class="phones"><div class="phone"><div class="scr" id="phscr"></div></div><div style="max-width:380px"><div class="card"><h3>What the salesman can do</h3><ul style="padding-inline-start:18px;margin:0"><li>See today's route and shops, with balance</li><li>Take orders; schemes applied automatically</li><li>Collect payment, receipt on WhatsApp</li><li>Print on Bluetooth thermal printer</li><li>Work fully <b>offline</b>, sync later</li><li>End-of-day cash handover</li></ul></div><div class="card" style="margin-top:12px"><h3>Try it</h3><div class="row"><div class="tog ${S.ph.offline?'on':''}" onclick="S.ph.offline=!S.ph.offline;render()"></div><span>Simulate no internet</span></div><small style="color:var(--mut)">Orders saved while offline show as “pending sync”.</small></div></div></div>`;
+AFTER.phone=()=>phoneRender();
+function phoneRender(){const p=S.ph,it=items(),cs=custs();const c=cs[p.shop%cs.length];const T=['home','route','order','collect','sync'];
+ let body='';const tot=()=>Object.entries(p.cart).reduce((s,[k,v])=>s+v*it.find(x=>x.code===k).price*it.find(x=>x.code===k).conv,0);
+ if(p.tab==='home')body=`<div class="pc" style="text-align:center"><svg viewBox="0 0 100 100" width="96"><circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/><circle cx="50" cy="50" r="40" fill="none" stroke="var(--pri)" stroke-width="10" stroke-dasharray="${.78*251} 251" transform="rotate(-90 50 50)" stroke-linecap="round"/><text x="50" y="56" text-anchor="middle" font-size="18" font-weight="700">78%</text></svg><br><small>Today's target · ${R(400000)}</small></div><div class="row" style="gap:8px"><div class="pc" style="flex:1"><small>Orders</small><br><b style="font-size:18px">18</b></div><div class="pc" style="flex:1"><small>Collected</small><br><b style="font-size:18px">${K(312500)}</b></div></div><div class="pc"><b>Today: Route A (Old City)</b><br><small>28 shops · 14 visited</small></div><button class="btn" style="width:100%" onclick="S.ph.tab='route';phoneRender()">Continue route</button>`;
+ else if(p.tab==='route')body=cs.slice(0,6).map((x,i)=>`<div class="pc" onclick="S.ph.shop=${i};S.ph.tab='order';S.ph.cart={};phoneRender()"><div class="row" style="justify-content:space-between"><b>${x.n}</b>${i<2?chip('Visited','ok'):chip(['0.4 km','0.9 km','1.2 km','2 km'][i%4])}</div><small style="color:var(--mut)">${x.area}</small><br><small>Balance <b>${R(x.bal)}</b>${x.bal>x.lim&&x.lim?' · '+'<span style="color:var(--bad)">over limit</span>':''}</small></div>`).join('');
+ else if(p.tab==='order')body=`<div class="pc"><b>${c.n}</b><br><small>Balance ${R(c.bal)} · Limit ${R(c.lim)}</small></div>${it.slice(0,5).map(x=>{const q=p.cart[x.code]||0;const fr=x.sch&&M('schemes')?Math.floor(q/x.sch[0])*x.sch[1]:0;return `<div class="pc"><div class="row" style="justify-content:space-between"><div><b>${x.n}</b><br><small>${R(x.price*x.conv)} / ${x.pack}</small>${x.sch&&M('schemes')?`<br>${chip('Buy '+x.sch[0]+', get '+x.sch[1]+' free','ok')}`:''}${fr?`<br><small style="color:var(--ok)">+${fr} free applied</small>`:''}</div><div class="qty"><button onclick="phq('${x.code}',-1)">−</button><b>${q}</b><button onclick="phq('${x.code}',1)">+</button></div></div></div>`}).join('')}<div style="position:sticky;bottom:0;background:#f4f5f7;padding-top:6px"><button class="btn" style="width:100%" onclick="phSave()">Save order · ${R(tot()*(M('fbr')?1.18:1))}</button></div>`;
+ else if(p.tab==='collect')body=`<div class="pc"><b>${c.n}</b><br><small>Outstanding ${R(c.bal)}</small></div><label class="l">Amount</label><input type="number" value="25000"><label class="l" style="margin-top:8px">Method</label><select class="f"><option>Cash</option>${M('cheques')?'<option>Cheque</option>':''}<option>JazzCash / Easypaisa</option></select><button class="btn" style="width:100%;margin-top:12px" onclick="p=S.ph;p.pending++;toast('Receipt saved'+(p.offline?' (will sync later)':' & sent on WhatsApp'));phoneRender()">Save & send receipt</button><button class="btn g" style="width:100%;margin-top:8px" onclick="toast('Printing on Bluetooth printer')">Print receipt</button>`;
+ else body=`<div class="pc" style="text-align:center"><div style="font-size:30px">${p.offline?'📵':'✅'}</div><b>${p.offline?'Offline mode':'All synced'}</b><br><small>${p.pending} item(s) ${p.offline?'waiting for internet':'uploaded'}</small></div><button class="btn" style="width:100%" ${p.offline?'disabled style="opacity:.5;width:100%"':''} onclick="S.ph.pending=0;toast('Synced to server');phoneRender()">Sync now</button><div class="pc" style="margin-top:10px"><b>End of day</b><br><small>Cash to hand over: ${R(312500)}</small><br><button class="btn g s" style="margin-top:6px" onclick="toast('Day closed')">Close day</button></div>`;
+ $('phscr').innerHTML=`<div class="ps"><span>9:41</span><span>${p.offline?'No signal':'4G ▮▮▮'}</span></div><div class="ph"><b>${p.tab==='home'?'Salam, Imran':p.tab==='route'?'Today\'s Route':p.tab==='order'?'Take Order':p.tab==='collect'?'Collect Payment':'Sync'}</b><small>${p.offline?'● Offline · '+p.pending+' pending':'● Online'}</small></div><div class="pb">${body}</div><div class="pn">${[['home','Home'],['route','Route'],['order','Order'],['collect','Collect'],['sync','Sync']].map(x=>`<a class="${p.tab===x[0]?'on':''}" onclick="S.ph.tab='${x[0]}';phoneRender()">${x[1]}</a>`).join('')}</div>`}
+function phq(c,d){S.ph.cart[c]=Math.max(0,(S.ph.cart[c]||0)+d);phoneRender()}
+function phSave(){S.ph.pending++;toast(S.ph.offline?'Saved offline. Will sync later.':'Order sent to office');S.ph.cart={};S.ph.tab='route';phoneRender()}
+
+/* ---- REPORTS ---- */
+PAGES.rep=()=>{const it=items();const cur=S.tab.rp||'profit';const k=S.tenant==='dist'?1:.4;
+ const list=[['profit','Profit by item'],['sales','Sales by customer'],['age','Receivable aging'],['stock','Stock valuation']];
+ return head('Reports','Every report can be filtered, exported to Excel / PDF and sent on WhatsApp.',`<button class="btn g" onclick="toast('Exported to Excel')">Export Excel</button><button class="btn g" onclick="toast('PDF ready')">PDF</button>`)+tabs('rp',list,'profit')+
+ `<div class="row" style="margin-bottom:12px"><select class="sel"><option>This month</option><option>Last month</option><option>This year</option></select><select class="sel"><option>All categories</option></select>${M('salesman')?'<select class="sel"><option>All salesmen</option></select>':''}</div>`+
+ (cur==='profit'?`<div class="card tw"><table><thead><tr><th>Item</th><th class="num">Sold</th><th class="num">Sales</th><th class="num">Cost</th><th class="num">Profit</th><th class="num">Margin</th></tr></thead><tbody>${it.map((x,i)=>{const q=Math.round((60-i*7)*k)*x.conv;const s=q*x.price,c=q*x.cost;return `<tr><td><b>${x.n}</b></td><td class="num">${qtyTxt(x,q)}</td><td class="num">${R(s)}</td><td class="num">${R(c)}</td><td class="num"><b>${R(s-c)}</b></td><td class="num">${((s-c)/s*100).toFixed(1)}%</td></tr>`}).join('')}</tbody></table></div>`
+ :cur==='sales'?`<div class="card"><h3>Top customers (Rs thousand)</h3>${bars([880,710,640,520,400,310,220].map(v=>Math.round(v*k)),['A','B','C','D','E','F','G'].map((l,i)=>(custs()[i]||{n:l}).n.split(' ')[0]))}</div>`
+ :cur==='age'?`<div class="card tw"><table><thead><tr><th>Customer</th><th class="num">0–30</th><th class="num">31–60</th><th class="num">61–90</th><th class="num">90+</th><th class="num">Total</th></tr></thead><tbody>${custs().filter(c=>c.bal).map(c=>`<tr><td>${c.n}</td><td class="num">${K(c.bal*.5)}</td><td class="num">${K(c.bal*.3)}</td><td class="num">${K(c.bal*.15)}</td><td class="num">${K(c.bal*.05)}</td><td class="num"><b>${K(c.bal)}</b></td></tr>`).join('')}</tbody></table></div>`
+ :`<div class="card tw"><table><thead><tr><th>Item</th><th>On hand</th><th class="num">Cost value</th><th class="num">Retail value</th></tr></thead><tbody>${it.map(x=>`<tr><td>${x.n}</td><td>${qtyTxt(x,x.stock)}</td><td class="num">${R(x.stock*x.cost)}</td><td class="num">${R(x.stock*x.price)}</td></tr>`).join('')}</tbody></table></div>`)+
+ `<div class="grid g4" style="margin-top:14px">${['Daybook','Sales tax (FBR) return','Supplier ledger','Expiry report','Salesman commission','Slow-moving stock'].filter(r=>!(r.includes('FBR')&&!M('fbr'))&&!(r==='Expiry report'&&!M('batch'))&&!(r.includes('Salesman')&&!M('salesman'))).map(r=>`<div class="card cl" style="cursor:pointer" onclick="toast('${r} opens here')"><b>${r}</b><br><small style="color:var(--mut)">More reports →</small></div>`).join('')}</div>`};
+
+/* ---- SETTINGS ---- */
+PAGES.set=()=>{const cur=S.tab.st||'mod';
+ return head('Settings & Modules','This is how one product fits every business: turn modules on or off, rename terms, add your own fields.')+
+ tabs('st',[['mod','Business type & modules'],['term','Terminology'],['cf','Custom fields'],['roles','Users & roles'],['inv','Invoice & tax']],'mod')+
+ (cur==='mod'?`<div class="note" style="margin-bottom:14px"><b>1. Pick a starting flavour</b> and it switches on the right modules. <b>2. Fine-tune</b> any toggle below. The menu on the left changes instantly.</div>
+  <div class="grid g4" style="margin-bottom:16px">${Object.entries(PRESETS).map(([k,p])=>`<div class="pre ${S.tenant===k?'on':''}" onclick="setTenant('${k}');S.page='set';render()"><b>${p.tag.split(' · ')[0]}</b><small>${Object.values(p.mods).filter(Boolean).length} modules on</small></div>`).join('')}<div class="pre" onclick="toast('Other: pharmacy, general retail, wholesale… (presets are easy to add)')"><b>+ More presets</b><small>Pharmacy, general retail…</small></div></div>
+  ${MODS.map(g=>`<div class="card" style="margin-bottom:12px"><h3>${g[0]}</h3>${g[1].map(m=>`<div class="mod"><div><b>${m[1]}</b><small>${m[2]}</small></div><div class="tog ${M(m[0])?'on':''}" onclick="S.mods['${m[0]}']=!S.mods['${m[0]}'];S.cart=null;render()"></div></div>`).join('')}</div>`).join('')}`
+ :cur==='term'?`<div class="card"><p class="sub">Rename words to match how this business talks. They update everywhere.</p><div class="fg">${[['supplier','Supplier (singular)'],['suppliers','Suppliers (plural)'],['staff','Sales staff'],['customer','Customer'],['packTitle','Default packing unit']].map(f=>`<div><label class="l">${f[1]}</label><input type="text" value="${LB(f[0])}" oninput="S.labels['${f[0]}']=this.value"></div>`).join('')}</div><button class="btn" style="margin-top:14px" onclick="toast('Saved. Check Purchases & Sales pages.')">Save</button></div>`
+ :cur==='cf'?`<div class="card"><p class="sub">Add your own fields to items, customers or invoices. No programming needed.</p><table><tr><th>Applies to</th><th>Field name</th><th>Type</th></tr>${cfields().map(f=>`<tr><td>Items</td><td><b>${f}</b></td><td>Text</td></tr>`).join('')}<tr><td>Customers</td><td><b>NTN / CNIC</b></td><td>Text</td></tr></table><div class="row" style="margin-top:12px"><input type="text" id="ncf" placeholder="New field name" style="max-width:240px"><button class="btn" onclick="if($('ncf').value){cfields().push($('ncf').value);render()}">+ Add field to Items</button></div></div>`
+ :cur==='roles'?`<div class="card tw"><table><thead><tr><th>Permission</th><th>Owner</th><th>Manager</th><th>Accountant</th><th>Storekeeper</th>${M('salesman')?'<th>Salesman</th>':'<th>Cashier</th>'}</tr></thead><tbody>${[['See cost & profit',1,1,1,0,0],['Give discount above 5%',1,1,0,0,0],['Edit / delete invoices',1,1,0,0,0],['Adjust stock',1,1,0,1,0],['Receive payments',1,1,1,0,1],['See all customers',1,1,1,0,0],['Close day / cash book',1,1,1,0,0]].map(r=>`<tr><td>${r[0]}</td>${r.slice(1).map(v=>`<td>${v?'✅':'—'}</td>`).join('')}</tr>`).join('')}</tbody></table><p class="sub" style="margin:10px 0 0">Custom roles can be created. Every change is stored in the audit log.</p></div>`
+ :`<div class="grid g2"><div class="card"><h3>Invoice template</h3><div class="fg"><div><label class="l">Paper</label><select class="f"><option>A4</option><option>A5</option><option>Thermal 80mm</option></select></div><div><label class="l">Language</label><select class="f"><option>English + Urdu</option><option>English</option><option>Urdu</option></select></div></div><div class="row" style="margin-top:10px"><button class="btn g" onclick="invPreview('PREVIEW-1',64300,'Sample Customer')">Preview invoice</button></div></div>${M('fbr')?`<div class="card"><h3>FBR integration</h3><div class="fg"><div><label class="l">NTN</label><input type="text" value="4521987-3"></div><div><label class="l">STRN</label><input type="text" value="17-00-9876-123-45"></div></div><p class="note" style="margin-top:10px">Invoices are reported to FBR in real time and carry the FBR QR code.</p></div>`:'<div class="card"><h3>FBR integration</h3><p class="sub">Turn on the FBR module to enable tax invoices.</p></div>'}</div>`)};
+
+/* ---- PLATFORM ADMIN ---- */
+PAGES.plat=()=>head('Platform Admin (SaaS)','For us, not the customer. All businesses run on one system, each with its own data, modules and branding.',`<button class="btn" onclick="newTenant()">+ New business</button>`)+
+ `<div class="grid g4" style="margin-bottom:14px"><div class="card kpi"><small>Active businesses</small><b>3</b></div><div class="card kpi"><small>Users</small><b>41</b></div><div class="card kpi"><small>Monthly revenue</small><b>${R(60000)}</b></div><div class="card kpi"><small>Mobile app installs</small><b>12</b></div></div>
+ <div class="card tw"><table><thead><tr><th>Business</th><th>Flavour</th><th>Plan</th><th>Users</th><th>Modules on</th><th>Status</th></tr></thead><tbody>${Object.entries(PRESETS).map(([k,p],i)=>`<tr class="cl" onclick="setTenant('${k}')"><td><b>${p.name}</b><br><small style="color:var(--mut)">${p.city}</small></td><td>${p.tag.split(' · ')[0]}</td><td>${['Business','Starter','Starter'][i]}</td><td>${[18,6,5][i]}</td><td>${Object.entries(p.mods).filter(m=>m[1]).map(m=>chip(m[0])).join(' ')}</td><td>${chip('Active','ok')}</td></tr>`).join('')}</tbody></table></div>
+ <p class="note" style="margin-top:14px">One codebase. A new business is a settings choice (flavour + modules + branding), not a new deployment.</p>`;
+function newTenant(){openModal(`<h2 style="margin-top:0">New business</h2><div class="fg"><div><label class="l">Business name</label><input type="text" placeholder="e.g. Mian Traders"></div><div><label class="l">Flavour</label><select class="f"><option>Distribution agency</option><option>Hardware store</option><option>Electric store</option><option>Pharmacy</option><option>General retail</option></select></div><div><label class="l">Plan</label><select class="f"><option>Starter</option><option>Business</option></select></div></div><div class="row" style="margin-top:14px"><button class="btn" onclick="closeModal();toast('Business created with preset modules')">Create</button><button class="btn g" onclick="closeModal()">Cancel</button></div>`)}
+
+/* ---- DRIVER APP (delivery module without salesmen) ---- */
+const _phoneSales=PAGES.phone,_prSales=phoneRender;
+PAGES.phone=()=>M('salesman')?_phoneSales():head('Driver Mobile App','The van driver sees exactly what to deliver and whether to collect cash. Tap through it like a real phone.')+
+ `<div class="phones"><div class="phone"><div class="scr" id="phscr"></div></div><div style="max-width:380px"><div class="card"><h3>What the driver sees</h3><ul style="padding-inline-start:18px;margin:0"><li>Today's deliveries in route order</li><li>A clear banner per order: <b>collect cash Rs X</b> or <b>no cash to collect</b>. Credit and company-paid details stay with the office.</li><li>Mark delivered, report returns or shortages</li><li>Cash collected and end-of-day handover</li><li>Works offline, syncs later</li></ul></div><div class="card" style="margin-top:12px"><h3>Try it</h3><div class="row"><div class="tog ${S.ph.offline?'on':''}" onclick="S.ph.offline=!S.ph.offline;render()"></div><span>Simulate no internet</span></div></div></div></div>`;
+phoneRender=function(){if(M('salesman'))return _prSales();ordersInit();const p=S.ph;if(!['home','trip','detail','sync'].includes(p.tab))p.tab='home';
+ const mine=S.orders.map((o,i)=>({o,i})).filter(x=>x.o.st==='Loaded'||x.o.st==='Out'||x.o.st==='Delivered');const left=mine.filter(x=>x.o.st!=='Delivered');
+ const toCollect=left.reduce((s,x)=>s+cod(x.o),0),got=mine.filter(x=>x.o.st==='Delivered').reduce((s,x)=>s+cod(x.o),0);
+ const banner=o=>cod(o)?`<div style="border-radius:9px;padding:9px 10px;font-weight:700;margin:8px 0;background:var(--okbg);color:var(--ok)">COLLECT CASH ${R(cod(o))}</div>`:`<div style="border-radius:9px;padding:9px 10px;font-weight:700;margin:8px 0;background:#eceff2;color:#475467">NO CASH TO COLLECT</div>`;
+ let body='',title='Delivery';
+ if(p.tab==='home'){title='Salam, Akbar';body=`<div class="pc"><b>Van-2 · Suzuki Ravi</b><br><small>${mine.length} deliveries today · ${left.length} left</small></div><div class="row" style="gap:8px;flex-wrap:nowrap"><div class="pc" style="flex:1"><small>Cash to collect</small><br><b style="font-size:17px;color:var(--ok)">${R(toCollect)}</b></div><div class="pc" style="flex:1"><small>Cash collected</small><br><b style="font-size:17px">${R(got)}</b></div></div><div class="pc"><small>The banner on each order tells you if cash is to be collected, and how much.</small></div><button class="btn" style="width:100%" onclick="S.ph.tab='trip';phoneRender()">Start deliveries</button>`}
+ else if(p.tab==='trip'){title='Today\'s Deliveries';body=mine.map(x=>`<div class="pc" onclick="S.ph.o=${x.i};S.ph.tab='detail';phoneRender()" style="${x.o.st==='Delivered'?'opacity:.55':''}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${x.o.c}</b>${x.o.st==='Delivered'?chip('Done','ok'):''}</div><small style="color:var(--mut)">${x.o.r} · ${x.o.no}</small>${x.o.st==='Delivered'?'':banner(x.o)}</div>`).join('')}
+ else if(p.tab==='detail'){const o=S.orders[p.o];title=o.no;body=`<div class="pc"><b>${o.c}</b><br><small>${o.r}</small>${banner(o)}<table style="font-size:12px">${o.lines.map(l=>`<tr><td>${l[0]}</td><td class="num">${l[1]}</td></tr>`).join('')}</table></div>${cod(o)?`<label class="l">Cash received</label><input type="number" value="${cod(o)}">`:''}<button class="btn" style="width:100%;margin-top:10px" onclick="phDeliver()">${o.st==='Delivered'?'Delivered ✓':'Mark delivered'+(cod(o)?' & cash received':'')}</button><button class="btn g" style="width:100%;margin-top:8px" onclick="toast('Return / shortage form: pick item and quantity')">Report return / shortage</button><button class="btn g" style="width:100%;margin-top:8px" onclick="S.ph.tab='trip';phoneRender()">Back</button>`}
+ else{title='Sync';body=`<div class="pc" style="text-align:center"><div style="font-size:30px">${p.offline?'📵':'✅'}</div><b>${p.offline?'Offline mode':'All synced'}</b><br><small>${p.pending} item(s) ${p.offline?'waiting for internet':'uploaded'}</small></div><button class="btn" style="width:100%" ${p.offline?'disabled':''} onclick="S.ph.pending=0;toast('Synced to server');phoneRender()">Sync now</button><div class="pc" style="margin-top:10px"><b>End of day</b><br><small>Cash to hand over: ${R(got)}</small><br><button class="btn g s" style="margin-top:6px" onclick="toast('Trip closed. Cash handover recorded.')">Close trip</button></div>`}
+ $('phscr').innerHTML=`<div class="ps"><span>9:41</span><span>${p.offline?'No signal':'4G ▮▮▮'}</span></div><div class="ph"><b>${title}</b><small>${p.offline?'● Offline · '+p.pending+' pending':'● Online'}</small></div><div class="pb">${body}</div><div class="pn">${[['home','Home'],['trip','Deliveries'],['sync','Sync']].map(x=>`<a class="${p.tab===x[0]||(x[0]==='trip'&&p.tab==='detail')?'on':''}" onclick="S.ph.tab='${x[0]}';phoneRender()">${x[1]}</a>`).join('')}</div>`};
+function phDeliver(){const o=S.orders[S.ph.o];if(o.st!=='Delivered'){o.st='Delivered';S.ph.pending++;toast(cod(o)?'Delivered. '+R(cod(o))+' cash recorded.':'Delivered.')}S.ph.tab='trip';phoneRender()}
+
+/* ---------------- BOOT ---------------- */
+loadPreset('dist');buildNav();render();
+</script>
+</body>
+</html>
